@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerClose, DrawerContent,  DrawerFooter, DrawerTrigger } from "@/components/ui/drawer";
 
 const MobileDrawer = () => {
   const navigate = useNavigate();

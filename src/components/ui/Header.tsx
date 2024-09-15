@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import MobileDrawer from "./MobileDrawer";
 
-import logo from "../../../public/assets/logo.svg"
+import logo from "/assets/logo.svg"
 
 const Header = () => {
   return (
