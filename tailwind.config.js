@@ -15,6 +15,7 @@ export default {
       },
       colors: {
         greyColor: "#7C7C7C",
+        darkGrey: "#252422",
         blackColor: "#0A0908",
         redColor: "#bc0013",
         background: "hsl(var(--background))",
