@@ -27,7 +27,7 @@ const ResidentialProperties = () => {
         <h3 className="uppercase text-white font-goldman md:text-[45px] font-bold mb-8">Residential Properties in Egypt</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {categories.map((category, index) => (
-            <div key={index} className="flex flex-col items-center justify-center mb-4 gap-1 bg-white p-4 rounded-lg">
+            <div key={index} className="flex flex-col items-center justify-center mb-4 gap-1 bg-white hover:bg-[#F4F3EE] duration-200 p-4 rounded-lg">
               <div className="">
                 <img src={category.image} />
               </div>
