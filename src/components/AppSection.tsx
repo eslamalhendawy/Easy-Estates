@@ -2,7 +2,7 @@ import temp from "/assets/temp.svg";
 
 const AppSection = () => {
   return (
-    <section className="container mx-auto py-12 px-6 lg:px-12 flex items-center justify-between gap-8">
+    <section className="container mx-auto py-12 px-6 lg:px-12 items-center justify-between gap-8 hidden md:flex">
       <div className="hidden md:block">
         <img src={temp} alt="" />
       </div>

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom";
 import PropertiesGrid from "./PropertiesGrid";
 
 const FeaturedProperties = () => {
@@ -14,7 +15,7 @@ const FeaturedProperties = () => {
       </div>
       <PropertiesGrid />
       <div className="mt-6 flex justify-center">
-        <button className="bg-darkGrey hover:bg-black duration-200 text-white py-2 px-8 rounded-xl">View All</button>
+        <Link to="/properties" className="bg-darkGrey hover:bg-black duration-200 text-white py-2 px-8 rounded-xl">View All</Link>
       </div>
     </section>
   )

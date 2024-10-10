@@ -20,6 +20,9 @@ const Header = () => {
         <li className="hover:text-blackColor duration-200">
           <Link to="/about-us">About US</Link>
         </li>
+        <li className="hover:text-blackColor duration-200">
+          <Link to="/Sell">Sell</Link>
+        </li>
       </ul>
       <div className="hidden font-bold text-greyColor hover:text-blackColor duration-200 lg:flex items-center gap-6">
         <Link to="/login" className="uppercase ">Log in</Link>

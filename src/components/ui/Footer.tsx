@@ -17,11 +17,11 @@ const Footer = () => {
           <div>
             <h6 className="text-lg font-semibold mb-4">Discover</h6>
             <ul className="text-[#CCC5B9] text-sm">
-              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">Cairo</li>
-              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">New Capital</li>
-              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">6th October</li>
-              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">North Coast</li>
-              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">North Coast</li>
+              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">Town House</li>
+              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">Modern Villa</li>
+              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">Apartment</li>
+              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">Office</li>
+              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">Single Family</li>
             </ul>
           </div>
           <div>

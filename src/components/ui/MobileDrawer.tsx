@@ -22,6 +22,9 @@ const MobileDrawer = () => {
             <button onClick={() => navigate("/about-us")} className="uppercase text-lg text-greyColor hover:text-blackColor duration-200 font-bold">
               about us
             </button>
+            <button onClick={() => navigate("/sell")} className="uppercase text-lg text-greyColor hover:text-blackColor duration-200 font-bold">
+              sell
+            </button>
           </DrawerClose>
           <DrawerFooter>
             <DrawerClose className="flex justify-center gap-6 items-center">
