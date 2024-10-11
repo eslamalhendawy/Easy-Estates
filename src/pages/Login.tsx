@@ -9,7 +9,7 @@ const Login = () => {
     <section className="flex items-center">
       <div className="w-full lg:basis-1/2 xl:basis-3/5 p-8">
         <h2 className="font-goldman font-bold text-4xl xl:text-[45px] lg:w-[80%] mx-auto mb-4">Log In</h2>
-        <p className="text-greyColor font-semiBold font-gothic text-[22px] lg:w-[80%] mx-auto mb-8">
+        <p className="text-greyColor font-semibold font-gothic text-[22px] lg:w-[80%] mx-auto mb-8">
           Don’t have an account?{" "}
           <Link to="/sign-up" className="text-redColor">
             Sign Up
@@ -19,7 +19,7 @@ const Login = () => {
           <label htmlFor="email" className="font-semibold text-lg">
             Email or Phone number
           </label>
-          <input type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none" />
+          <input type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <div className="flex items-center justify-between">
@@ -31,7 +31,7 @@ const Login = () => {
               <span>{hidden ? "Show" : "Hide"}</span>
             </button>
           </div>
-          <input type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none" />
+          <input type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
         <div className="flex flex-col gap-3 sm:flex-row items-center justify-between lg:w-[80%] mx-auto mb-6">
           <div className="flex items-center space-x-2">
