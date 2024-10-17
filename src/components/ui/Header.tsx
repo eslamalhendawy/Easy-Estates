@@ -24,9 +24,9 @@ const Header = () => {
           <Link to="/Sell">Sell</Link>
         </li>
       </ul>
-      <div className="hidden font-bold text-greyColor hover:text-blackColor duration-200 lg:flex items-center gap-6">
-        <Link to="/login" className="uppercase ">Log in</Link>
-        <Link to="/sign-up" className="uppercase bg-darkGrey hover:bg-black duration-200 text-white py-2 px-6 rounded-lg">Sign up</Link>
+      <div className="hidden font-bold text-greyColor  lg:flex items-center gap-6">
+        <Link to="/login" className="uppercase hover:text-blackColor duration-200">Log in</Link>
+        <Link to="/sign-up" className="uppercase bg-black hover:bg-[#403d39] duration-200 text-white py-2 px-6 rounded-lg">Sign up</Link>
       </div>
       <MobileDrawer />
     </header>

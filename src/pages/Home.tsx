@@ -6,13 +6,13 @@ import AppSection from '@/components/AppSection'
 
 const Home = () => {
   return (
-    <div>
+    <section>
       <Hero />
       <ResidentialProperties />
       <HowToHelp />
       <FeaturedProperties />
       <AppSection />
-    </div>
+    </section>
   )
 }
 

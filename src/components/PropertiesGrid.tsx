@@ -111,7 +111,7 @@ const PropertiesGrid = () => {
               <span>{item.address}</span>
             </div>
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-              <p className="text-redColor font-semibold">{item.price} EGP</p>
+              <p className="text-redColor font-semibold whitespace-nowrap text-sm xl:text-base">{item.price} EGP</p>
               <div className="flex">
                 <div className="flex gap-2">
                   <div className="flex items-center gap-1 border-r border-[#D9D9D9] pr-1 text-sm">

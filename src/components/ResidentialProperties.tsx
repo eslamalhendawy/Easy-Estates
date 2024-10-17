@@ -22,7 +22,7 @@ const ResidentialProperties = () => {
     },
   ];
   return (
-    <section className="bg-darkGrey p-8 md:p-12  font-gothic">
+    <div className="bg-darkGrey p-8 md:p-12  font-gothic">
       <div className="container mx-auto">
         <h3 className="uppercase text-white font-goldman md:text-[45px] font-bold mb-8">Residential Properties in Egypt</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -39,7 +39,7 @@ const ResidentialProperties = () => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
