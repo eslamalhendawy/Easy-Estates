@@ -3,7 +3,7 @@ import image from "/assets/hero.png"
 const Hero = () => {
   return (
     <div className="bg-redColor lg:flex items-center relative">
-      <div className="px-8 py-8 text-left text-white basis-2/3">
+      <div className="px-8 xl:px-12 py-8 text-left text-white basis-2/3">
         <div className="bg-[#F4F3EE33] w-[1px] h-full absolute top-0 left-[14%] lg:left-[9.5%]" />
         <div className="bg-[#F4F3EE33] w-[1px] h-full absolute top-0 left-[28%] lg:left-[19%]" />
         <div className="bg-[#F4F3EE33] w-[1px] h-full absolute top-0 left-[42%] lg:left-[28.5%]" />

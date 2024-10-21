@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Properties from './pages/Properties'
 import AboutUs from './pages/AboutUs'
+import Property from './pages/Property'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/property/:id" element={<Property />} />
         </Routes>
         <Footer />
       </Router>

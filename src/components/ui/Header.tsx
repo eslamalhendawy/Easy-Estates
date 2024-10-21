@@ -6,7 +6,7 @@ import logo from "/assets/logo.svg"
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center py-2 lg:p-6 px-4 lg:px-8 font-gothic">
+    <header className="flex justify-between items-center py-2 lg:p-6 px-4 lg:px-8 xl:px-12 font-gothic">
       <Link to="/">
         <img className="w-[150px]" src={logo} alt="" />
       </Link>
