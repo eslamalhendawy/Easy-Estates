@@ -110,7 +110,7 @@ const PropertiesGrid = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-6 font-gothic mx-auto">
       {list.map((item, index) => (
         <Link to={`/property/${item.id}`} key={index}>
-          <div  className="bg-center bg-cover p-4 h-[350px] flex flex-col justify-between rounded-xl" style={{ backgroundImage: `url(${item.image})` }}>
+          <div  className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl" style={{ backgroundImage: `url(${item.image})` }}>
             <div className="flex justify-between items-center">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl">{item.type}</div>
               <div className="text-redColor flex items-center gap-2">
