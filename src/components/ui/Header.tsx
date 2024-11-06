@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import { useAppContext } from "@/Context/AppContext";
 
 import MobileDrawer from "./MobileDrawer";
+import ProfileMenu from "./ProfileMenu";
 
-import logo from "/assets/logo.svg"
+import logo from "/assets/logo.svg";
 
 const Header = () => {
+  const { userData } = useAppContext();
+
   return (
     <header className="flex justify-between items-center py-2 lg:p-6 px-4 lg:px-8 xl:px-12 font-gothic">
       <Link to="/">
@@ -25,8 +29,18 @@ const Header = () => {
         </li>
       </ul>
       <div className="hidden font-bold text-greyColor  lg:flex items-center gap-6">
-        <Link to="/login" className="uppercase hover:text-blackColor duration-200">Log in</Link>
-        <Link to="/sign-up" className="uppercase bg-black hover:bg-[#403d39] duration-200 text-white py-2 px-6 rounded-lg">Sign up</Link>
+        {userData.loggedIn ? (
+          <ProfileMenu />
+        ) : (
+          <>
+            <Link to="/login" className="uppercase hover:text-blackColor duration-200">
+              Log in
+            </Link>
+            <Link to="/sign-up" className="uppercase bg-black hover:bg-[#403d39] duration-200 text-white py-2 px-6 rounded-lg">
+              Sign up
+            </Link>
+          </>
+        )}
       </div>
       <MobileDrawer />
     </header>

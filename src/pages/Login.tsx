@@ -1,10 +1,29 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useAppContext } from "@/Context/AppContext";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
 import image from "/assets/loginImage.png";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
+  const { setUserData } = useAppContext();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      toast({ title: "Please fill all fields", variant: "destructive" });
+      return;
+    }
+    setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
+    localStorage.setItem("token", "some-token");
+    navigate("/");
+    toast({ title: "Logged in successfully", variant: "success", duration: 2000 });
+  };
+
   return (
     <section className="flex items-center">
       <div className="w-full lg:basis-1/2 xl:basis-3/5 p-8">
@@ -19,7 +38,7 @@ const Login = () => {
           <label htmlFor="email" className="font-semibold text-lg">
             Email or Phone number
           </label>
-          <input type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          <input onChange={(e) => setEmail(e.target.value)} type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <div className="flex items-center justify-between">
@@ -31,7 +50,7 @@ const Login = () => {
               <span>{hidden ? "Show" : "Hide"}</span>
             </button>
           </div>
-          <input type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          <input onChange={(e) => setPassword(e.target.value)} type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
         <div className="flex flex-col gap-3 sm:flex-row items-center justify-between lg:w-[80%] mx-auto mb-6">
           <div className="flex items-center space-x-2">
@@ -45,7 +64,9 @@ const Login = () => {
           </Link>
         </div>
         <div className="flex justify-center mb-8">
-          <button className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold">Log In</button>
+          <button onClick={handleLogin} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold">
+            Log In
+          </button>
         </div>
         <p className="text-greyColor md:text-lg font-medium lg:w-[80%] mx-auto">
           This page is protected by Google reCAPTCHA to ensure you're not a bot. <br /> <span className="text-black">Learn more.</span>

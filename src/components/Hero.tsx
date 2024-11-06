@@ -2,7 +2,7 @@ import image from "/assets/hero.png"
 
 const Hero = () => {
   return (
-    <div className="bg-redColor lg:flex items-center relative">
+    <div className="bg-redColor lg:flex items-stretch xl:items-center relative">
       <div className="px-8 xl:px-12 py-8 text-left text-white basis-2/3">
         <div className="bg-[#F4F3EE33] w-[1px] h-full absolute top-0 left-[14%] lg:left-[9.5%]" />
         <div className="bg-[#F4F3EE33] w-[1px] h-full absolute top-0 left-[28%] lg:left-[19%]" />
@@ -15,7 +15,7 @@ const Hero = () => {
         <p className="font-gothic font-semibold lg:border-l-[3px] border-white lg:pl-2 sm:text-lg lg:text-xl xl:text-2xl xl:w-[80%] 2xl:w-[70%]">This real estate system offers a streamlined and intuitive platform for buyers & sellers. It features advanced search options, interactive tools, and personalized recommendations. Users can easily explore properties, and connect with professionals.</p>
       </div>
       <div className="basis-1/3 hidden lg:block">
-        <img className="w-full" src={image} alt="" />
+        <img className="w-full h-full" src={image} alt="" />
       </div>
     </div>
   );
