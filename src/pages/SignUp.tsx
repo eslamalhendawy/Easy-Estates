@@ -24,7 +24,7 @@ const SignUp = () => {
     setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
     localStorage.setItem("token", "some-token");
     navigate("/");
-    toast({ title: "Logged in successfully", variant: "success", duration: 2000 });
+    toast({ title: "Signed Up in successfully", variant: "success", duration: 2000 });
   };
 
   return (

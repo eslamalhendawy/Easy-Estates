@@ -16,6 +16,7 @@ import Favorites from "./pages/Favorites";
 import FAQS from "./pages/FAQS";
 import Privacy from "./pages/Privacy";
 import Profile from "./pages/Profile";
+import Sell from "./pages/Sell";
 
 //Testing Git Installation
 
@@ -27,7 +28,7 @@ function App() {
     if (token) {
       setUserData({ name: "John Doe", email: "something@something.com", loggedIn: true });
     }
-  });
+  },[]);
 
   return (
     <>
@@ -45,6 +46,7 @@ function App() {
           <Route path="/faqs" element={<FAQS />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/sell" element={<Sell />} />
         </Routes>
         <Toaster />
         <Footer />

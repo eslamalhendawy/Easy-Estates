@@ -20,15 +20,17 @@ const ProfileMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src="https://github.com/shadcn.png" alt={userData.name} />
+          <AvatarFallback>{`${userData.name.split(" ")[0][0]}${userData.name.split(" ")[1][0]}`}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-60 absolute right-[-30px] font-gothic font-semibold">
         <DropdownMenuGroup>
           <span className="text-greyColor text-xs">Hello,</span>
           <span className="block text-redColor text-sm mt-1 mb-2">{userData.name}</span>
-          <Link to="/profile" className="bg-[#403D39] hover:bg-darkGrey duration-200 text-white mx-auto block mb-2 px-6 py-2 rounded-xl ">View & Edit Your Profile</Link>
+          <Link to="/profile" className="bg-[#403D39] hover:bg-darkGrey duration-200 text-white mx-auto block mb-2 px-6 py-2 rounded-xl ">
+            View & Edit Your Profile
+          </Link>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/my-ads")} className="cursor-pointer">
             My Ads
@@ -42,7 +44,7 @@ const ProfileMenu = () => {
             Privacy
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => navigate("/my-ads")} className="cursor-pointer">
+          <DropdownMenuItem onClick={() => navigate("/faqs")} className="cursor-pointer">
             FAQs
           </DropdownMenuItem>
           <DropdownMenuSeparator />
