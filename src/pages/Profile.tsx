@@ -18,6 +18,11 @@ const Profile = () => {
   const endYear = new Date().getFullYear();
   const years = Array.from({ length: endYear - 1900 + 1 }, (_, i) => `${1900 + i}`).reverse();
 
+  const handleClick = async () => {
+    console.log(day, month, year, gender);
+    
+  };
+
   return (
     <section className="container mx-auto p-2 lg:w-[80%] xl:w-[70%]">
       <div className=" border border-[#D9D9D9] my-8 rounded-xl mx-auto">
@@ -79,10 +84,10 @@ const Profile = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4">
-            <label htmlFor="dateOfBirth" className="font-bold basis-1/5 text-xl">
+            <label htmlFor="gender" className="font-bold basis-1/5 text-xl">
               Gender
             </label>
-            <Select onValueChange={(e) => setDay(e)}>
+            <Select onValueChange={(e) => setGender(e)}>
               <SelectTrigger className="outline-none basis-4/5">
                 <SelectValue placeholder="Select Your Gender" className="text-greyColor" />
               </SelectTrigger>
@@ -118,7 +123,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="p-6 md:p-8 font-gothic flex justify-end">
-          <button className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Save Changes</button>
+          <button onClick={handleClick} className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Save Changes</button>
         </div>
       </div>
     </section>
