@@ -20,11 +20,10 @@ const Profile = () => {
 
   const handleClick = async () => {
     console.log(day, month, year, gender);
-    
   };
 
   return (
-    <section className="container mx-auto p-2 lg:w-[80%] xl:w-[70%]">
+    <main className="container mx-auto p-2 lg:w-[80%] xl:w-[70%]">
       <div className=" border border-[#D9D9D9] my-8 rounded-xl mx-auto">
         <h1 className="font-goldman font-bold text-xl md:text-[32px] border-b border-[#D9D9D9] p-6 md:p-8">Edit Profile</h1>
         <div className="p-6 md:p-8 border-b border-[#D9D9D9] font-gothic">
@@ -123,10 +122,12 @@ const Profile = () => {
           </div>
         </div>
         <div className="p-6 md:p-8 font-gothic flex justify-end">
-          <button onClick={handleClick} className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Save Changes</button>
+          <button onClick={handleClick} className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">
+            Save Changes
+          </button>
         </div>
       </div>
-    </section>
+    </main>
   );
 };
 

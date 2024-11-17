@@ -7,110 +7,29 @@ import bathroom from "/assets/bathroom.svg";
 import area from "/assets/area.svg";
 import share from "/assets/share.svg";
 
-const PropertiesGrid = () => {
-  const list = [
-    { 
-      id: 1,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 2,
-      type: "For Rent",
-      favorite: false,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 6,
-      bathrooms: 3,
-      area: 1200,
-    },
-    {
-      id: 3,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 4,
-      type: "For Rent",
-      favorite: false,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 6,
-      bathrooms: 3,
-      area: 1200,
-    },
-    {
-      id: 5,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 6,
-      type: "For Rent",
-      favorite: false,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 6,
-      bathrooms: 3,
-      area: 1200,
-    },
-    {
-      id: 7,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 8,
-      type: "For Rent",
-      favorite: false,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 6,
-      bathrooms: 3,
-      area: 1200,
-    },
-  ];
+interface PropertyItem {
+  id: string;
+  image: string;
+  type: string;
+  favorite: boolean;
+  title: string;
+  address: string;
+  price: string;
+  rooms: number;
+  bathrooms: number;
+  area: number;
+}
+
+interface PropertiesGridProps {
+  list: PropertyItem[];
+}
+
+const PropertiesGrid: React.FC<PropertiesGridProps> = (props) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-6 font-gothic mx-auto">
-      {list.map((item, index) => (
+      {props.list.map((item, index) => (
         <Link to={`/property/${item.id}`} key={index}>
-          <div  className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl" style={{ backgroundImage: `url(${item.image})` }}>
+          <div className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl" style={{ backgroundImage: `url(${item.image})` }}>
             <div className="flex justify-between items-center">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl">{item.type}</div>
               <div className="text-redColor flex items-center gap-2">

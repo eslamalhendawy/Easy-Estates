@@ -25,7 +25,7 @@ const Login = () => {
   };
 
   return (
-    <section className="flex items-center">
+    <main className="flex items-center">
       <div className="w-full lg:basis-1/2 xl:basis-3/5 p-8">
         <h2 className="font-goldman font-bold text-4xl xl:text-[45px] lg:w-[80%] mx-auto mb-4">Log In</h2>
         <p className="text-greyColor font-semibold font-gothic text-[22px] lg:w-[80%] mx-auto mb-8">
@@ -75,7 +75,7 @@ const Login = () => {
       <div className="hidden lg:block basis-1/2 xl:basis-2/5">
         <img className="h-full w-full" src={image} alt="" />
       </div>
-    </section>
+    </main>
   );
 };
 

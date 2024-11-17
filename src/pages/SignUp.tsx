@@ -28,7 +28,7 @@ const SignUp = () => {
   };
 
   return (
-    <section className="flex items-stretch 2xl:items-center">
+    <main className="flex items-stretch 2xl:items-center">
       <div className="w-full lg:basis-1/2 xl:basis-3/5 p-8">
         <h2 className="font-goldman font-bold text-4xl xl:text-[45px] lg:w-[80%] mx-auto mb-4">Create Your Account</h2>
         <p className="text-greyColor font-semibold font-gothic text-[22px] lg:w-[80%] mx-auto mb-8">
@@ -86,7 +86,7 @@ const SignUp = () => {
       <div className="hidden lg:block basis-1/2 xl:basis-2/5">
         <img className="h-full w-full" src={image} alt="" />
       </div>
-    </section>
+    </main>
   );
 };
 
