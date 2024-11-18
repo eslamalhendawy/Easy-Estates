@@ -30,6 +30,8 @@ const Sell = () => {
       };
       reader.readAsDataURL(file);
     }
+    console.log(area, bedrooms, bathrooms, country, city);
+    
   };
 
   const handleImageClick = (index: number) => {
