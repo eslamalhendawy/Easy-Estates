@@ -65,6 +65,16 @@
   }
 }
 
+@layer utilities{
+  .my-adds-nav-buttons{
+    @apply px-8 py-2 border rounded-lg text-[16px] font-semibold hover:text-veryDarkGrey hover:border-veryDarkGrey duration-200
+  }
+
+  .ad-buttons{
+    @apply px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200
+  }
+}
+
 html{
   scroll-behavior: smooth;
 }

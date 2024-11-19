@@ -11,7 +11,7 @@ import SignUp from "./pages/SignUp";
 import Properties from "./pages/Properties";
 import AboutUs from "./pages/AboutUs";
 import Property from "./pages/Property";
-import MyAdds from "./pages/MyAdds";
+import MyAds from "./pages/MyAds";
 import Favorites from "./pages/Favorites";
 import FAQS from "./pages/FAQS";
 import Privacy from "./pages/Privacy";
@@ -41,7 +41,7 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/property/:id" element={<Property />} />
-          <Route path="/my-ads" element={<MyAdds />} />
+          <Route path="/my-ads" element={<MyAds />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/faqs" element={<FAQS />} />
           <Route path="/privacy" element={<Privacy />} />

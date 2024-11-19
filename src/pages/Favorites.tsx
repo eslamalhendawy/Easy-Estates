@@ -17,7 +17,7 @@ const Favorites = () => {
   ];
   return (
     <main className="container mx-auto px-2 sm:px-8 xl:px-12 py-8 minHeight">
-      <span className="text-greyColor text-[18px] font-semibold block mb-2">Profile</span>
+      <span className="text-greyColor text-[18px] font-semibold block mb-2 font-gothic">Profile</span>
       <h1 className="font-goldman font-bold text-xl md:text-[32px] mb-8">Favorites</h1>
       {list.length > 0 ? <PropertiesGrid list={list} /> : <p className="text-center font-bold font-gothic text-[22px] mt-24">No Favourites Yet</p>}
     </main>

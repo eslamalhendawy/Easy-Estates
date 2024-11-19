@@ -68,16 +68,16 @@ const SignUp = () => {
           <input onChange={(e) => setPassword(e.target.value)} type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
           <p className="text-[#666666] text-sm">Use 8 or more characters with a mix of letters, numbers & symbols</p>
         </div>
-        <div className="flex items-center space-x-2 lg:w-[80%] mx-auto mb-6">
+        <div className="flex items-center space-x-2 font-gothic lg:w-[80%] mx-auto mb-6">
           <Checkbox id="remember-me" />
           <label htmlFor="remember-me" className="font-medium">
             I want to receive emails about the product, feature updates, events, and marketing promotions.
           </label>
         </div>
-        <p className="text-[#666666] md:text-lg font-medium lg:w-[80%] mx-auto mb-8">
+        <p className="text-[#666666] md:text-lg font-medium font-gothic lg:w-[80%] mx-auto mb-8">
           By creating an account, you agree to the <span className="text-black underline">Terms of use</span> and <span className="text-black underline">Privacy Policy</span>.
         </p>
-        <div className="flex justify-center ">
+        <div className="flex justify-center font-gothic">
           <button onClick={handleSignUp} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold">
             Sign Up
           </button>

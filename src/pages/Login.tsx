@@ -52,7 +52,7 @@ const Login = () => {
           </div>
           <input onChange={(e) => setPassword(e.target.value)} type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row items-center justify-between lg:w-[80%] mx-auto mb-6">
+        <div className="flex flex-col gap-3 sm:flex-row items-center justify-between lg:w-[80%] mx-auto mb-6 font-gothic">
           <div className="flex items-center space-x-2">
             <Checkbox id="remember-me" />
             <label htmlFor="remember-me" className="font-medium">
@@ -64,11 +64,11 @@ const Login = () => {
           </Link>
         </div>
         <div className="flex justify-center mb-8">
-          <button onClick={handleLogin} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold">
+          <button onClick={handleLogin} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-gothic font-semibold">
             Log In
           </button>
         </div>
-        <p className="text-greyColor md:text-lg font-medium lg:w-[80%] mx-auto">
+        <p className="text-greyColor md:text-lg font-medium font-gothic lg:w-[80%] mx-auto">
           This page is protected by Google reCAPTCHA to ensure you're not a bot. <br /> <span className="text-black">Learn more.</span>
         </p>
       </div>
