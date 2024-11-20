@@ -17,6 +17,7 @@ import FAQS from "./pages/FAQS";
 import Privacy from "./pages/Privacy";
 import Profile from "./pages/Profile";
 import Sell from "./pages/Sell";
+import EditAd from "./pages/EditAd";
 
 //Testing Git Installation
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/sell" element={<Sell />} />
+          <Route path="/edit-ad/:id" element={<EditAd />} />
         </Routes>
         <Toaster />
         <Footer />

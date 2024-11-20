@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const Sell = () => {
+const EditAd = () => {
   const [type, setType] = useState("town house");
   const [category, setCategory] = useState("sell");
   const [area, setArea] = useState("");
@@ -31,7 +31,6 @@ const Sell = () => {
       reader.readAsDataURL(file);
     }
     console.log(area, bedrooms, bathrooms, country, city);
-    
   };
 
   const handleImageClick = (index: number) => {
@@ -206,11 +205,11 @@ const Sell = () => {
         </div>
         {/* Button */}
         <div className="p-8 flex justify-end">
-          <button className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Post Now</button>
+          <button className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Save Changes</button>
         </div>
       </div>
     </main>
   );
 };
 
-export default Sell;
+export default EditAd;

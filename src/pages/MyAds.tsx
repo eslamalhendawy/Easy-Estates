@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import image from "/assets/townhouseImage.svg";
 
@@ -48,7 +49,7 @@ const MyAds = () => {
             </div>
           </div>
           <div className="flex flex-col justify-between items-start lg:items-end gap-4">
-            <button className="text-redColor font-bold text-lg lg:text-[22px]">View & Edit</button>
+            <Link to={`/edit-ad/${index}`} className="text-redColor font-bold text-lg lg:text-[22px]">View & Edit</Link>
             <div className="flex gap-2">
               <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">Inactive</button>
               <button className="ad-buttons bg-black text-white">Delete</button>
