@@ -3,6 +3,9 @@ import { useAppContext } from "@/Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
+
+import { postData } from "../lib/apiCalls.ts";
 
 import image from "/assets/loginImage.png";
 
@@ -15,71 +18,102 @@ const SignUp = () => {
   const { setUserData } = useAppContext();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
+  const regNumbers = /^[0-9]+$/;
+  const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
   const handleSignUp = async () => {
     if (!userName || !email || !phone || !password) {
       toast({ title: "Please fill all fields", variant: "destructive" });
       return;
     }
-    setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
-    localStorage.setItem("token", "some-token");
-    navigate("/");
-    toast({ title: "Signed Up in successfully", variant: "success", duration: 2000 });
+    if (!regEmail.test(email)) {
+      toast({ title: "Please enter a valid email", variant: "destructive" });
+      return;
+    }
+    if (!regNumbers.test(phone) || phone.length !== 11) {
+      toast({ title: "Please enter a valid phone number", variant: "destructive" });
+      return;
+    }
+    if (password.length < 8) {
+      toast({ title: "Password must be at least 8 characters", variant: "destructive" });
+      return;
+    }
+    const data = {
+      name: userName,
+      email: email,
+      phone: phone,
+      password: password,
+    };
+
+    const response = await postData("/auth/signup", data);
+    console.log(response);
+
+    // setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
+    // localStorage.setItem("token", "some-token");
+    // navigate("/");
+    // toast({ title: "Signed Up in successfully", variant: "success", duration: 2000 });
   };
 
   return (
-    <main className="flex items-stretch 2xl:items-center">
+    <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="flex items-stretch 2xl:items-center">
       <div className="w-full lg:basis-1/2 xl:basis-3/5 p-8">
-        <h2 className="font-goldman font-bold text-4xl xl:text-[45px] lg:w-[80%] mx-auto mb-4">Create Your Account</h2>
+        <h2 className="font-goldman font-bold text-4xl xl:text-[45px] lg:w-[80%] mx-auto mb-4">{t("createAccount")}</h2>
         <p className="text-greyColor font-semibold font-gothic text-[22px] lg:w-[80%] mx-auto mb-8">
-          Already have an account?{" "}
+          {t("alreadyHave")}{" "}
           <Link to="/login" className="text-redColor">
-            Log In
+            {t("login")}
           </Link>
         </p>
+        {/* Username */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <label htmlFor="username" className="font-semibold text-lg">
-            Username
+            {t("username")}
           </label>
           <input onChange={(e) => setUserName(e.target.value)} type="text" id="username" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
+        {/* Email */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <label htmlFor="email" className="font-semibold text-lg">
-            Email
+            {t("email")}
           </label>
           <input onChange={(e) => setEmail(e.target.value)} type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
+        {/* Phone */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <label htmlFor="phone" className="font-semibold text-lg">
-            Phone Number
+            {t("phoneNumber")}
           </label>
           <input onChange={(e) => setPhone(e.target.value)} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
         </div>
+        {/* Password */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <div className="flex items-center justify-between">
             <label htmlFor="password" className="font-semibold text-lg">
-              Password
+              {t("password")}
             </label>
             <button onClick={() => setHidden(!hidden)} className="flex gap-2 items-center text-greyColor text-lg">
               <i className={`fa-solid ${hidden ? "fa-eye" : "fa-eye-slash"}`}></i>
-              <span>{hidden ? "Show" : "Hide"}</span>
+              <span>{hidden ? t("show") : t("hide")}</span>
             </button>
           </div>
           <input onChange={(e) => setPassword(e.target.value)} type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
-          <p className="text-[#666666] text-sm">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+          <p className="text-[#666666] text-sm">{t("use8")}</p>
         </div>
-        <div className="flex items-center space-x-2 font-gothic lg:w-[80%] mx-auto mb-6">
+
+        <div className="flex items-center gap-2 font-gothic lg:w-[80%] mx-auto mb-6">
           <Checkbox id="remember-me" />
           <label htmlFor="remember-me" className="font-medium">
-            I want to receive emails about the product, feature updates, events, and marketing promotions.
+            {t("receiveEmails")}
           </label>
         </div>
         <p className="text-[#666666] md:text-lg font-medium font-gothic lg:w-[80%] mx-auto mb-8">
-          By creating an account, you agree to the <span className="text-black underline">Terms of use</span> and <span className="text-black underline">Privacy Policy</span>.
+          {t("creatingAccount")} <span className="text-black underline">{t("termsOfUse")}</span> {t("and")} <span className="text-black underline">{t("privacyPolicy")}</span>.
         </p>
         <div className="flex justify-center font-gothic">
           <button onClick={handleSignUp} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold">
-            Sign Up
+            {t("signUp")}
           </button>
         </div>
       </div>

@@ -65,11 +65,14 @@ const Header = () => {
         ) : (
           <>
             <Link to="/login" className="uppercase hover:text-blackColor duration-200">
-              Log in
+              {t("login")}
             </Link>
             <Link to="/sign-up" className="uppercase bg-black hover:bg-[#403d39] duration-200 text-white py-2 px-6 rounded-lg">
-              Sign up
+              {t("signUp")}
             </Link>
+            <button onClick={changeLanguage}>
+              <i className="fa-solid fa-globe text-greyColor hover:text-blackColor duration-200 text-2xl"></i>
+            </button>
           </>
         )}
       </div>

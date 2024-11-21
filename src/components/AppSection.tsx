@@ -1,8 +1,8 @@
-import temp from "/assets/temp.svg";
+import temp from "/assets/mobileSection.svg";
 
 const AppSection = () => {
   return (
-    <div className="container mx-auto py-12 px-6 lg:px-12 items-center justify-between gap-8 hidden md:flex">
+    <div className="container mx-auto py-12 px-6 lg:px-12 xl:px-[120px] items-center justify-between xl:justify-normal gap-8 xl:gap-24 hidden md:flex">
       <div className="hidden md:block">
         <img src={temp} alt="" />
       </div>
