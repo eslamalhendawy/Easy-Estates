@@ -5,14 +5,18 @@ interface ApiResponse<T> {
   data: T;
 }
 
-export const postData = async <T>(url: string, data: T, token: string): Promise<ApiResponse<T>> => {
+export const postData = async <T>(url: string, data: T): Promise<ApiResponse<T>> => {
   let result: ApiResponse<T> | Error = { data: null as unknown as T };
   await axios
-    .post<ApiResponse<any>>(baseURL + url, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    .post<ApiResponse<any>>(
+      baseURL + url,
+      data
+      //   {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
+    )
     .then((response) => {
       result = response.data;
     })

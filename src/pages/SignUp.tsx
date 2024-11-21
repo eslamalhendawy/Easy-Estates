@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAppContext } from "@/Context/AppContext";
-import { Link, useNavigate } from "react-router-dom";
+// import { useAppContext } from "@/Context/AppContext";
+import { Link } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
@@ -15,9 +15,9 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
-  const { setUserData } = useAppContext();
+  // const { setUserData } = useAppContext();
   const { toast } = useToast();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
   const regNumbers = /^[0-9]+$/;
