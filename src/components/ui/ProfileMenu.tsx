@@ -3,11 +3,13 @@ import { useAppContext } from "@/Context/AppContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 const ProfileMenu = () => {
   const { userData, setUserData } = useAppContext();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -24,7 +26,7 @@ const ProfileMenu = () => {
           <AvatarFallback>{`${userData.name.split(" ")[0][0]}${userData.name.split(" ")[1][0]}`}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-60 absolute right-[-30px] font-gothic font-semibold">
+      <DropdownMenuContent className={`w-60 absolute font-gothic font-semibold ${i18n.language === "ar" ? "left-[-30px]" : "right-[-30px]"}`}>
         <DropdownMenuGroup>
           <span className="text-greyColor text-xs">Hello,</span>
           <span className="block text-redColor text-sm mt-1 mb-2">{userData.name}</span>
