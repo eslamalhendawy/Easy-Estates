@@ -19,7 +19,6 @@ import Profile from "./pages/Profile";
 import Sell from "./pages/Sell";
 import EditAd from "./pages/EditAd";
 
-//Testing Git Installation
 
 function App() {
   const { setUserData } = useAppContext();
