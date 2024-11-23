@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "@/Context/AppContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -22,8 +24,8 @@ const ProfileMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" alt={userData.name} />
-          <AvatarFallback>{`${userData.name.split(" ")[0][0]}${userData.name.split(" ")[1][0]}`}</AvatarFallback>
+          {/* <AvatarImage src="https://github.com/shadcn.png" alt={userData.name} /> */}
+          <AvatarFallback>{userData.name[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className={`w-60 absolute font-gothic font-semibold ${i18n.language === "ar" ? "left-[-30px]" : "right-[-30px]"}`}>

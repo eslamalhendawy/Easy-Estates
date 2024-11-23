@@ -1,6 +1,8 @@
+// @ts-nocheck
+
 import { useState } from "react";
-// import { useAppContext } from "@/Context/AppContext";
-import { Link } from "react-router-dom";
+import { useAppContext } from "@/Context/AppContext";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
@@ -15,9 +17,9 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
-  // const { setUserData } = useAppContext();
+  const { setUserData } = useAppContext();
   const { toast } = useToast();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
   const regNumbers = /^[0-9]+$/;
@@ -45,10 +47,25 @@ const SignUp = () => {
       email: email,
       phone: phone,
       password: password,
+      countryCode: "20",
     };
 
     const response = await postData("/auth/signup", data);
-    console.log(response);
+    if (response.message === "Verification email sent") {
+      localStorage.setItem("token", response.token);
+      setUserData({
+        name: response.user.name,
+        email: response.user.email,
+        phone: response.user.phone,
+        role: response.user.role,
+        favoriteProperties: response.user.favoriteProperties,
+        loggedIn: true,
+      });
+      toast({ title: "Signed Up in successfully", variant: "success" });
+      navigate("/");
+    } else {
+      toast({ title: "Sign up failed please try again.", variant: "destructive" });
+    }
 
     // setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
     // localStorage.setItem("token", "some-token");
@@ -85,7 +102,12 @@ const SignUp = () => {
           <label htmlFor="phone" className="font-semibold text-lg">
             {t("phoneNumber")}
           </label>
-          <input onChange={(e) => setPhone(e.target.value)} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          <div className="flex gap-2">
+            <div className="border border-black px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
+              <span className="outline-none focus:border-darkGrey duration-200 w-[30px]">+20</span>
+            </div>
+            <input onChange={(e) => setPhone(e.target.value)} placeholder="Enter Number" type="text" id="name" className="grow border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          </div>
         </div>
         {/* Password */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">

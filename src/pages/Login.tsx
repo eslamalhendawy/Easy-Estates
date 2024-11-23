@@ -1,5 +1,9 @@
+// @ts-nocheck
+
 import { useState } from "react";
 import { useAppContext } from "@/Context/AppContext";
+import { postData } from "@/lib/apiCalls";
+
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
@@ -12,16 +16,32 @@ const Login = () => {
   const { setUserData } = useAppContext();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [disabled, setDisabled] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
       toast({ title: "Please fill all fields", variant: "destructive" });
       return;
     }
-    setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
-    localStorage.setItem("token", "some-token");
-    navigate("/");
-    toast({ title: "Logged in successfully", variant: "success", duration: 2000 });
+    setDisabled(true)
+    const response = await postData("/auth/login", { email, password });
+    console.log(response);
+    if (response.message === "Login successful") {
+      localStorage.setItem("token", response.token);
+      setUserData({
+        name: response.data.name,
+        email: response.data.email,
+        phone: response.data.phone,
+        role: response.data.role,
+        favoriteProperties: response.data.favoriteProperties,
+        loggedIn: true,
+      });
+      navigate("/");
+      toast({ title: "Logged in successfully", variant: "success" });
+    } else {
+      toast({ title: response.response.data.message, variant: "destructive" });
+      setDisabled(false)
+    }
   };
 
   return (
@@ -64,7 +84,7 @@ const Login = () => {
           </Link>
         </div>
         <div className="flex justify-center mb-8">
-          <button onClick={handleLogin} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-gothic font-semibold">
+          <button disabled={disabled} onClick={handleLogin} className={` hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-gothic font-semibold ${disabled ? "bg-[#403d39]" : "bg-black"}`}>
             Log In
           </button>
         </div>

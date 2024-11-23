@@ -1,40 +1,19 @@
-import { createContext, useContext, useState, ReactNode, FC } from "react";
+// @ts-nocheck
 
-// Define the shape of the context data
-interface UserData {
-  name: string;
-  email: string;
-  loggedIn: boolean;
-}
+import { createContext, useContext, useState } from "react";
 
-interface AppContextType {
-  userData: UserData;
-  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
-}
+const AppContext = createContext();
 
-// Create the context with a default value
-const AppContext = createContext<AppContextType | undefined>(undefined);
-
-// Create a provider component
-export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [userData, setUserData] = useState<UserData>({
+export const AppProvider = ({ children }) => {
+  const [userData, setUserData] = useState({
     name: "",
     email: "",
+    phone: "",
+    favoriteProperties: [],
+    role: "",
     loggedIn: false,
   });
-
-  return (
-    <AppContext.Provider value={{ userData, setUserData }}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{ userData, setUserData }}>{children}</AppContext.Provider>;
 };
 
-// Custom hook to use the AppContext
-export const useAppContext = (): AppContextType => {
-  const context = useContext(AppContext);
-  if (context === undefined) {
-    throw new Error("useAppContext must be used within an AppProvider");
-  }
-  return context;
-};
+export const useAppContext = () => useContext(AppContext);
