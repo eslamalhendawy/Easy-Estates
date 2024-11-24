@@ -39,6 +39,27 @@
   "getItOn": "Get it on",
   "googlePlay": "Google Play",
   "appStore": "Apple Store",
-  "followUs": "Follow Us"
-
+  "followUs": "Follow Us",
+  "dontHaveAccount": "Don't have an account?",
+  "rememberMe": "Remember Me",
+  "forgotPassword": "Forgot Password?",
+  "thisPage": "This page is protected by Google reCAPTCHA to ensure you're not a bot.",
+  "learnMore": "Learn more.",
+  "hello": "Hello,",
+  "viewProfile": "View & Edit Profile",
+  "isc": "intuitive, Streamlined, Comprehensive",
+  "heroDescription": "This real estate system offers a streamlined and intuitive platform for buyers & sellers. It features advanced search options, interactive tools, and personalized recommendations. Users can easily explore properties, and connect with professionals.",
+  "residentialProperties": "Residential Properties In Egypt",
+  "howToHelp": "See How EasyEstates Can Help...",
+  "welcomeTo": "Welcome to EasyEstate Our online platform is dedicated to helping you find the perfect home, no matter what your needs may be. Our website features an extensive selection of properties from around the world, so you're sure to find something that fits your lifestyle and budget.",
+  "atEasyEstates": "At EasyEstate, we're committed to providing you with the best possible service. Our team of experts is always here to help you find the right property for your needs, and we work hard to ensure that our website is easy to use and navigate. Whether you're a first-time homebuyer or an experienced investor, we have the tools and resources you need to succeed.",
+  "featuredProperties": "Featured Properties",
+  "takeADive": "Take a deep dive and browse homes to find what is right for you.",
+  "all": "All",
+  "buy": "Buy",
+  "rent": "Rent",
+  "viewAll": "View All",
+  "getTheApp": "Get the EasyEstate",
+  "mobileDescription": "Download our top-rated real estate app for iOS or Android to get alerts the moment your dream home hits the market."
+  
 }

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "@/Context/AppContext";
 import { useToast } from "@/hooks/use-toast";

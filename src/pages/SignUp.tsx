@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "@/Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,9 +21,15 @@ const SignUp = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const [disabled, setDisabled] = useState(false);
 
   const regNumbers = /^[0-9]+$/;
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+
+  useEffect(() => {
+    document.title = "Easy Estates | Sign Up";
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSignUp = async () => {
     if (!userName || !email || !phone || !password) {
@@ -42,6 +48,7 @@ const SignUp = () => {
       toast({ title: "Password must be at least 8 characters", variant: "destructive" });
       return;
     }
+    setDisabled(true);
     const data = {
       name: userName,
       email: email,
@@ -66,11 +73,6 @@ const SignUp = () => {
     } else {
       toast({ title: "Sign up failed please try again.", variant: "destructive" });
     }
-
-    // setUserData({ name: "John Doe", email: "somthing@something.com", loggedIn: true });
-    // localStorage.setItem("token", "some-token");
-    // navigate("/");
-    // toast({ title: "Signed Up in successfully", variant: "success", duration: 2000 });
   };
 
   return (
@@ -106,7 +108,7 @@ const SignUp = () => {
             <div className="border border-black px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
               <span className="outline-none focus:border-darkGrey duration-200 w-[30px]">+20</span>
             </div>
-            <input onChange={(e) => setPhone(e.target.value)} placeholder="Enter Number" type="text" id="name" className="grow border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+            <input onChange={(e) => setPhone(e.target.value)} type="text" id="phone" className="grow border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
           </div>
         </div>
         {/* Password */}
@@ -134,7 +136,7 @@ const SignUp = () => {
           {t("creatingAccount")} <span className="text-black underline">{t("termsOfUse")}</span> {t("and")} <span className="text-black underline">{t("privacyPolicy")}</span>.
         </p>
         <div className="flex justify-center font-gothic">
-          <button onClick={handleSignUp} className="bg-black hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold">
+          <button disabled={disabled} onClick={handleSignUp} className={` hover:bg-[#403d39] duration-200 text-white py-2 w-[60%] rounded-xl text-[22px] font-semibold ${disabled ? "bg-[#403d39]" : "bg-black"}`}>
             {t("signUp")}
           </button>
         </div>

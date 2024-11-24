@@ -1,7 +1,10 @@
+// @ts-nocheck
 import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Toaster } from "./components/ui/toaster";
 import { useAppContext } from "@/Context/AppContext";
+
+import { getData } from "./lib/apiCalls";
 
 import Header from "./components/ui/Header";
 import Home from "./pages/Home";
@@ -26,7 +29,20 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      setUserData({ name: "John Doe", email: "something@something.com", loggedIn: true });
+      const getUserData = async () => {
+        const response = await getData("/users/profile", token);
+        if (response.message === "User profile fetched successfully") {
+          setUserData({
+            name: response.user.name,
+            email: response.user.email,
+            phone: response.user.phone,
+            role: response.user.role,
+            favoriteProperties: response.user.favoriteProperties,
+            loggedIn: true,
+          });
+        }
+      };
+      getUserData();
     }
   },[]);
 

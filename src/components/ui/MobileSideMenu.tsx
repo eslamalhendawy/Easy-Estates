@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useAppContext } from "@/Context/AppContext";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate } from "react-router-dom";

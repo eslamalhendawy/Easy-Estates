@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import PropertiesGrid from "@/components/PropertiesGrid";
 
 import locationDot from "/assets/locationDot.svg";
@@ -5,7 +7,7 @@ import filter from "/assets/filter.svg";
 
 const Properties = () => {
   const list = [
-    { 
+    {
       id: "1",
       type: "For Rent",
       favorite: true,
@@ -102,6 +104,12 @@ const Properties = () => {
       area: 1200,
     },
   ];
+
+  useEffect(() => {
+    document.title = "Easy Estates | Properties";
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
       <div className="flex justify-center font-gothic mb-6">

@@ -28,32 +28,33 @@ const ProfileMenu = () => {
           <AvatarFallback>{userData.name[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className={`w-60 absolute font-gothic font-semibold ${i18n.language === "ar" ? "left-[-30px]" : "right-[-30px]"}`}>
+      <DropdownMenuContent dir={i18n.language === "ar" ? "rtl" : "ltr"} className={`w-60 absolute font-gothic font-semibold ${i18n.language === "ar" ? "left-[-30px]" : "right-[-30px]"}`}>
         <DropdownMenuGroup>
-          <span className="text-greyColor text-xs">Hello,</span>
+          <span className="text-greyColor text-xs">{t("hello")}</span>
           <span className="block text-redColor text-sm mt-1 mb-2">{userData.name}</span>
-          <Link to="/profile" className="bg-[#403D39] hover:bg-darkGrey duration-200 text-white mx-auto block mb-2 px-6 py-2 rounded-xl ">
-            View & Edit Your Profile
-          </Link>
+          <DropdownMenuItem onClick={() => navigate("/profile")} className="p-0 border-none bg-white block">
+            <span className="bg-[#403D39] hover:bg-darkGrey duration-200 text-white mx-auto block mb-2 px-6 py-2 rounded-xl text-center cursor-pointer">{t("viewProfile")}</span>
+          </DropdownMenuItem>
+
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/my-ads")} className="cursor-pointer">
-            My Ads
+            {t("myAds")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/favorites")} className="cursor-pointer">
-            Favorites
+            {t("favorites")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/privacy")} className="cursor-pointer">
-            Privacy
+            {t("privacy")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/faqs")} className="cursor-pointer">
-            FAQs
+            {t("faqs")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
-            Log out
+            {t("logout")}
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
