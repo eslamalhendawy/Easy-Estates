@@ -20,7 +20,7 @@ const Privacy = () => {
             <input type="text" id="name" placeholder="Confirm New Password" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg grow focus:border-darkGrey duration-200" />
           </div>
         </div>
-        <div className="p-6 md:p-8 border-b border-[#D9D9D9] font-gothic">
+        {/* <div className="p-6 md:p-8 border-b border-[#D9D9D9] font-gothic">
           <h2 className="font-bold text-xl mb-2">Contact Method</h2>
           <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4">
             <div className="flex gap-2 basis-1/2">
@@ -31,7 +31,7 @@ const Privacy = () => {
             </div>
             <p className="text-greyColor text-[14px] font-[500]">This is the number for buyers contacts, reminders, and other notifications.</p>
           </div>
-        </div>
+        </div> */}
         <div className="p-6 md:p-8 font-gothic flex justify-end">
           <button className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Save Changes</button>
         </div>

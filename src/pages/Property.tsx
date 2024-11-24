@@ -59,22 +59,14 @@ const Property = () => {
             </p>
           ))}
           <h4 className="font-bold font-gothic text-[22px] text-darkGrey my-6">Details</h4>
-          <div className="grid grid-cols-2 gap-6 font-gothic font-semibold sm:text-lg mb-6">
-            <div className="flex flex-col items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
-              <span>City</span>
-              <span>Ismailia</span>
-            </div>
-            <div className="flex flex-col items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
-              <span>Country</span>
-              <span>Egypt</span>
-            </div>
-            <div className="flex flex-col items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
-              <span>Phone</span>
-              <span>01028615569</span>
-            </div>
-            <div className="flex flex-col items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
+          <div className="flex flex-col gap-6 font-gothic font-semibold sm:text-lg mb-6">
+            <div className="flex items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
               <span>Price</span>
               <span className="text-redColor">5600 EGP</span>
+            </div>
+            <div className="flex  items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
+              <span>Phone</span>
+              <span>01028615569</span>
             </div>
           </div>
         </div>

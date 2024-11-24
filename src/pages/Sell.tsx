@@ -8,7 +8,7 @@ const Sell = () => {
   const [furniture, setFurniture] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
-  const [country, setCountry] = useState("");
+  const [location, setLocation] = useState("");
   const [city, setCity] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
@@ -31,7 +31,6 @@ const Sell = () => {
       reader.readAsDataURL(file);
     }
     console.log(area, bedrooms, bathrooms, country, city);
-    
   };
 
   const handleImageClick = (index: number) => {
@@ -136,28 +135,31 @@ const Sell = () => {
             </Select>
           </div>
         </div>
-        {/* Country */}
-        <div className="px-6 pb-3 pt-6 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Country*</span>
-          <div className="grow">
-            <input placeholder="Enter Country" onChange={(e) => setCountry(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
-          </div>
-        </div>
         {/* City */}
-        <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
+        <div className="px-6 pb-3 pt-6 flex flex-col gap-2 md:flex-row md:gap-0">
           <span className="text-darkGrey font-bold text-lg basis-1/3">City*</span>
           <div className="grow">
             <input placeholder="Enter City" onChange={(e) => setCity(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
           </div>
         </div>
+        {/* Location */}
+        <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
+          <span className="text-darkGrey font-bold text-lg basis-1/3">Location*</span>
+          <div className="grow">
+            <input placeholder="Enter Country" onChange={(e) => setLocation(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
+          </div>
+        </div>
         {/* Phone Number */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0 md:items-center">
           <span className="text-darkGrey font-bold text-lg basis-1/3">Phone Number*</span>
-          <div className="grow flex gap-2">
-            <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
-              <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" placeholder="+20" />
+          <div className="grow">
+            <div className="grow flex gap-2 mb-2">
+              <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
+                <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" placeholder="+20" />
+              </div>
+              <input placeholder="Enter Number" type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
             </div>
-            <input placeholder="Enter Number" type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
+            <button className="block ml-auto text-redColor font-bold">Use My Number</button>
           </div>
         </div>
         {/* Price */}

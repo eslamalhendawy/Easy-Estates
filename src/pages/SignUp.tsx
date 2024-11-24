@@ -105,8 +105,8 @@ const SignUp = () => {
             {t("phoneNumber")}
           </label>
           <div className="flex gap-2">
-            <div className="border border-black px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
-              <span className="outline-none focus:border-darkGrey duration-200 w-[30px]">+20</span>
+            <div className="border border-[#CCC5B9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
+              <span className="outline-none focus:border-darkGrey duration-200 w-[30px] text-[#CCC5B9]">+20</span>
             </div>
             <input onChange={(e) => setPhone(e.target.value)} type="text" id="phone" className="grow border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
           </div>

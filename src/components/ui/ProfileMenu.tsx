@@ -35,7 +35,6 @@ const ProfileMenu = () => {
           <DropdownMenuItem onClick={() => navigate("/profile")} className="p-0 border-none bg-white block">
             <span className="bg-[#403D39] hover:bg-darkGrey duration-200 text-white mx-auto block mb-2 px-6 py-2 rounded-xl text-center cursor-pointer">{t("viewProfile")}</span>
           </DropdownMenuItem>
-
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/my-ads")} className="cursor-pointer">
             {t("myAds")}
@@ -51,6 +50,10 @@ const ProfileMenu = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/faqs")} className="cursor-pointer">
             {t("faqs")}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="cursor-pointer">
+            {t("deleteAccount")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
