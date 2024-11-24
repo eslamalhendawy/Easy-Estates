@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useRef } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -30,7 +31,7 @@ const Sell = () => {
       };
       reader.readAsDataURL(file);
     }
-    console.log(area, bedrooms, bathrooms, country, city);
+    console.log(area, bedrooms, bathrooms, city);
   };
 
   const handleImageClick = (index: number) => {

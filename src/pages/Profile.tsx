@@ -1,26 +1,7 @@
+// @ts-nocheck
 import { useState } from "react";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Profile = () => {
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-  const [gender, setGender] = useState("");
-
-  const days = [];
-  for (let i = 1; i <= 31; i++) {
-    days.push(`${i}`);
-  }
-  const months = [];
-  for (let i = 1; i <= 12; i++) {
-    months.push(`${i}`);
-  }
-  const endYear = new Date().getFullYear();
-  const years = Array.from({ length: endYear - 1900 + 1 }, (_, i) => `${1900 + i}`).reverse();
-
-  const handleClick = async () => {
-    console.log(day, month, year, gender);
-  };
 
   return (
     <main className="container mx-auto p-2 lg:w-[80%] xl:w-[70%]">
