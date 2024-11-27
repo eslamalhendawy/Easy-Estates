@@ -61,6 +61,22 @@
   "viewAll": "View All",
   "getTheApp": "Get the EasyEstate",
   "mobileDescription": "Download our top-rated real estate app for iOS or Android to get alerts the moment your dream home hits the market.",
-  "deleteAccount": "Delete Account"
-  
+  "deleteAccount": "Delete Account",
+  "aboutUsHeader": "REAL ESTATE SERVICES THAT IMPROVE LIVES",
+  "profile": "Profile",
+  "noFavoritesYet": "No Favorites Yet",
+  "myAdsHeader": "Manage and view your Ads",
+  "active": "Active",
+  "pending": "Pending",
+  "inactive": "Inactive",
+  "view&Edit": "View & Edit",
+  "delete": "Delete",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "saveChanges": "Save Changes",
+  "editProfileHeader": "Edit Profile",
+  "name": "Name",
+  "phoneInfo": "This is the number for buyers contacts, reminders, and other notifications.",
+  "emailInfo": "We won't reveal your email to anyone else not use it to send you spam"
 }

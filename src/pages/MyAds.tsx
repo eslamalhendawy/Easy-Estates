@@ -1,10 +1,14 @@
+// @ts-nocheck
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import image from "/assets/townhouseImage.svg";
 
 const MyAds = () => {
   const [selectedTab, setSelectedTab] = useState("active");
+  const { t, i18n } = useTranslation();
 
   const list = [
     {
@@ -25,18 +29,18 @@ const MyAds = () => {
   ];
 
   return (
-    <main className="container mx-auto px-2 sm:px-8 xl:px-12 py-8 minHeight font-gothic">
-      <span className="text-greyColor text-[18px] font-semibold block mb-2">Profile</span>
-      <h1 className="font-goldman font-bold text-xl md:text-[32px] mb-8">Manage and view your Ads</h1>
+    <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8 minHeight font-gothic">
+      <span className="text-greyColor text-[18px] font-semibold block mb-2">{t("profile")}</span>
+      <h1 className="font-goldman font-bold text-xl md:text-[32px] mb-8">{t("myAdsHeader")}</h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:flex gap-4 mb-8">
         <button onClick={() => setSelectedTab("active")} className={`my-adds-nav-buttons ${selectedTab === "active" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
-          Active
+          {t("active")}
         </button>
         <button onClick={() => setSelectedTab("inactive")} className={`my-adds-nav-buttons ${selectedTab === "inactive" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
-          Inactive
+          {t("inactive")}
         </button>
         <button onClick={() => setSelectedTab("pending")} className={`my-adds-nav-buttons ${selectedTab === "pending" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
-          Pending
+          {t("pending")}
         </button>
       </div>
       {list.length > 0 ? list.map((item, index) => (
@@ -49,10 +53,10 @@ const MyAds = () => {
             </div>
           </div>
           <div className="flex flex-col justify-between items-start lg:items-end gap-4">
-            <Link to={`/edit-ad/${index}`} className="text-redColor font-bold text-lg lg:text-[22px]">View & Edit</Link>
+            <Link to={`/edit-ad/${index}`} className="text-redColor font-bold text-lg lg:text-[22px]">{t("view&Edit")}</Link>
             <div className="flex gap-2">
-              <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">Inactive</button>
-              <button className="ad-buttons bg-black text-white">Delete</button>
+              <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">{t("inactive")}</button>
+              <button className="ad-buttons bg-black text-white">{t("delete")}</button>
             </div>
           </div>
         </div>
