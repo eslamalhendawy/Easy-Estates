@@ -36,6 +36,7 @@ function App() {
             name: response.user.name,
             email: response.user.email,
             phone: response.user.phone,
+            countryCode: response.user.countryCode,
             role: response.user.role,
             favoriteProperties: response.user.favoriteProperties,
             loggedIn: true,

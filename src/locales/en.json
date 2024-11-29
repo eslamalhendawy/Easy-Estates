@@ -78,5 +78,19 @@
   "editProfileHeader": "Edit Profile",
   "name": "Name",
   "phoneInfo": "This is the number for buyers contacts, reminders, and other notifications.",
-  "emailInfo": "We won't reveal your email to anyone else not use it to send you spam"
+  "emailInfo": "We won't reveal your email to anyone else not use it to send you spam",
+  "passwordLength": "Password must be at least 8 characters long",
+  "passwordMatch": "Passwords must match",
+  "fillAllFields": "Please fill all fields",
+  "validPhone": "Please enter a valid phone number",
+  "validEmail": "Please enter a valid email address",
+  "userUpdated": "User updated successfully",
+  "errorMessage": "Something went wrong, please try again later",
+  "incorrectPassword": "Incorrect current password",
+  "passwordChanged": "Password changed successfully",
+  "loggedIn": "Logged in successfully",
+  "signedUp": "Signed up successfully",
+  "incorrectEmail/Password": "Invalid email or password",
+  "deleteAccountHeader": "Are you sure you want to delete this account? This action cannot be undone.",
+  "cancel": "Cancel"
 }

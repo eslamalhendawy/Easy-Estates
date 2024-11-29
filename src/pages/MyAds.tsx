@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +9,11 @@ import image from "/assets/townhouseImage.svg";
 const MyAds = () => {
   const [selectedTab, setSelectedTab] = useState("active");
   const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.title = `Easy Estates | My Ads`;
+    window.scrollTo(0, 0);
+  }, []);
 
   const list = [
     {

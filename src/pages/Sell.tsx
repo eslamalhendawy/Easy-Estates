@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Sell = () => {
@@ -13,6 +13,11 @@ const Sell = () => {
   const [city, setCity] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    document.title = `Easy Estates | Sell`;
+    window.scrollTo(0, 0);
+  }, []);
 
   const typeList = ["town house", "modern villa", "apartment", "office", "single family"];
   const governorates = ["Cairo, Egypt", "Giza, Egypt", "Alexandria, Egypt", "Dakahlia, Egypt", "Red Sea, Egypt", "Beheira, Egypt", "Fayoum, Egypt", "Gharbia, Egypt", "Ismailia, Egypt", "Monufia, Egypt", "Minya, Egypt", "Qalyubia, Egypt", "New Valley, Egypt", "Suez, Egypt", "Aswan, Egypt", "Assiut, Egypt", "Beni Suef, Egypt", "Port Said, Egypt", "Damietta, Egypt", "Sharqia, Egypt", "South Sinai, Egypt", "Kafr El Sheikh, Egypt", "Matruh, Egypt", "Luxor, Egypt", "Qena, Egypt", "North Sinai, Egypt", "Sohag, Egypt"];

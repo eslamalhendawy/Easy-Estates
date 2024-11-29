@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
     name: "",
     email: "",
     phone: "",
+    countryCode: "",
     favoriteProperties: [],
     role: "",
     loggedIn: false,

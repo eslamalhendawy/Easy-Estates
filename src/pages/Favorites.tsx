@@ -1,9 +1,17 @@
+// @ts-nocheck
+
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import PropertiesGrid from "@/components/PropertiesGrid";
 
 const Favorites = () => {
   const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.title = `Easy Estates | Favorites`;
+    window.scrollTo(0, 0);
+  }, []);
 
   const list = [
     {

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
+import DeleteAccountDialog from "./DeleteAccountDialog";
+
 const MobileSideMenu = () => {
   const { userData, setUserData } = useAppContext();
   const navigate = useNavigate();
@@ -92,6 +94,9 @@ const MobileSideMenu = () => {
                 <SheetClose className="uppercase hover:text-blackColor duration-200 outline-none" onClick={() => navigate("/faqs")}>
                   {t("faqs")}
                 </SheetClose>
+              </li>
+              <li>
+                <DeleteAccountDialog classList="" />
               </li>
             </>
           )}

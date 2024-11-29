@@ -7,6 +7,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
+import DeleteAccountDialog from "./DeleteAccountDialog";
+
 const ProfileMenu = () => {
   const { userData, setUserData } = useAppContext();
   const { toast } = useToast();
@@ -24,7 +26,6 @@ const ProfileMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Avatar className="cursor-pointer">
-          {/* <AvatarImage src="https://github.com/shadcn.png" alt={userData.name} /> */}
           <AvatarFallback>{userData.name[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -52,9 +53,7 @@ const ProfileMenu = () => {
             {t("faqs")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer">
-            {t("deleteAccount")}
-          </DropdownMenuItem>
+          <DeleteAccountDialog classList="cursor-pointer relative flex select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-[#f5f5f5] w-full" />
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
             {t("logout")}

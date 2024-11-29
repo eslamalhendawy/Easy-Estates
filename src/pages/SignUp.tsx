@@ -16,6 +16,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [countryCode, setCountryCode] = useState("20");
   const [hidden, setHidden] = useState(true);
   const { setUserData } = useAppContext();
   const { toast } = useToast();
@@ -33,19 +34,19 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     if (!userName || !email || !phone || !password) {
-      toast({ title: "Please fill all fields", variant: "destructive" });
+      toast({ title: t("fillAllFields"), variant: "destructive" });
       return;
     }
     if (!regEmail.test(email)) {
-      toast({ title: "Please enter a valid email", variant: "destructive" });
+      toast({ title: t("validEmail"), variant: "destructive" });
       return;
     }
     if (!regNumbers.test(phone) || phone.length !== 11) {
-      toast({ title: "Please enter a valid phone number", variant: "destructive" });
+      toast({ title: t("validPhone"), variant: "destructive" });
       return;
     }
     if (password.length < 8) {
-      toast({ title: "Password must be at least 8 characters", variant: "destructive" });
+      toast({ title: t("passwordLength"), variant: "destructive" });
       return;
     }
     setDisabled(true);
@@ -54,7 +55,7 @@ const SignUp = () => {
       email: email,
       phone: phone,
       password: password,
-      countryCode: "20",
+      countryCode,
     };
 
     const response = await postData("/auth/signup", data);
@@ -64,14 +65,15 @@ const SignUp = () => {
         name: response.user.name,
         email: response.user.email,
         phone: response.user.phone,
+        countryCode: response.user.countryCode,
         role: response.user.role,
         favoriteProperties: response.user.favoriteProperties,
         loggedIn: true,
       });
-      toast({ title: "Signed Up in successfully", variant: "success" });
+      toast({ title: t("signedUp"), variant: "success" });
       navigate("/");
     } else {
-      toast({ title: "Sign up failed please try again.", variant: "destructive" });
+      toast({ title: t("errorMessage"), variant: "destructive" });
     }
   };
 
@@ -104,11 +106,21 @@ const SignUp = () => {
           <label htmlFor="phone" className="font-semibold text-lg">
             {t("phoneNumber")}
           </label>
-          <div className="flex gap-2">
-            <div className="border border-[#CCC5B9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
-              <span className="outline-none focus:border-darkGrey duration-200 w-[30px] text-[#CCC5B9]">+20</span>
+          <div className={`flex gap-2 basis-1/2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
+            <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
+              <input
+                onChange={(e) => {
+                  const value = e.target.value.replace("+", "").trim(); // Remove the "+" if present
+                  setCountryCode(value);
+                }}
+                type="text"
+                id="countryCode"
+                dir="ltr"
+                className="outline-none focus:border-darkGrey duration-200 w-[30px]"
+                value={`+${countryCode}`}
+              />
             </div>
-            <input onChange={(e) => setPhone(e.target.value)} type="text" id="phone" className="grow border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+            <input onChange={(e) => setPhone(e.target.value)} value={phone} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200 grow" />
           </div>
         </div>
         {/* Password */}

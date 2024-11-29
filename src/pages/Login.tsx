@@ -27,7 +27,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      toast({ title: "Please fill all fields", variant: "destructive" });
+      toast({ title: t("fillAllFields"), variant: "destructive" });
       return;
     }
     setDisabled(true)
@@ -39,13 +39,14 @@ const Login = () => {
         email: response.data.email,
         phone: response.data.phone,
         role: response.data.role,
+        countryCode: response.data.countryCode,
         favoriteProperties: response.data.favoriteProperties,
         loggedIn: true,
       });
       navigate("/");
-      toast({ title: "Logged in successfully", variant: "success" });
-    } else {
-      toast({ title: response.response.data.message, variant: "destructive" });
+      toast({ title: t("loggedIn"), variant: "success" });
+    } else if(response.status === 401) {
+      toast({ title: t("incorrectEmail/Password"), variant: "destructive" });
       setDisabled(false)
     }
   };
