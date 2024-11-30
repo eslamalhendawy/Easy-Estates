@@ -91,7 +91,7 @@ const MyAds = () => {
             </div>
           </div>
         ))}
-      {!loading && ads.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">No Ads Yet</p>}
+      {!loading && ads.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noAdsYet")}</p>}
     </main>
   );
 };
