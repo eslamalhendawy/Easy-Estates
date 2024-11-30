@@ -3,11 +3,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "@/components/ui/skeleton";
 
-import image from "/assets/townhouseImage.svg";
+import { getData } from "@/lib/apiCalls";
+
 
 const MyAds = () => {
+  const [ads, setAds] = useState([]);
   const [selectedTab, setSelectedTab] = useState("active");
+  const [loading, setLoading] = useState(true);
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -15,23 +19,15 @@ const MyAds = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const list = [
-    {
-      image: image,
-      title: "Luxury Family Home",
-      type: "Town House",
-    },
-    {
-      image: image,
-      title: "Luxury Family Home",
-      type: "Town House",
-    },
-    {
-      image: image,
-      title: "Luxury Family Home",
-      type: "Town House",
-    },
-  ];
+  useEffect(() => {
+    const fetchAds = async () => {
+      const response = await getData("/properties/me", localStorage.getItem("token"));
+      setAds(response.data);
+      setLoading(false);
+      console.log(response);
+    };
+    fetchAds();
+  }, []);
 
   return (
     <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8 minHeight font-gothic">
@@ -48,24 +44,54 @@ const MyAds = () => {
           {t("pending")}
         </button>
       </div>
-      {list.length > 0 ? list.map((item, index) => (
-        <div key={index} className="flex flex-col lg:flex-row gap-4 justify-between mb-8">
-          <div className="flex flex-col lg:flex-row gap-3">
-            <img src={item.image} alt="ad" className="" />
-            <div className="">
-              <h3 className="font-bold text-greyColor text-lg lg:text-[22px] mb-3">{item.title}</h3>
-              <p className="text-black text-lg lg:text-[22px] font-bold">{item.type}</p>
+      {loading && (
+        <div className="">
+          <div className="flex flex-col space-y-3">
+            <Skeleton className="h-[200px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4" />
+              <Skeleton className="h-4" />
             </div>
           </div>
-          <div className="flex flex-col justify-between items-start lg:items-end gap-4">
-            <Link to={`/edit-ad/${index}`} className="text-redColor font-bold text-lg lg:text-[22px]">{t("view&Edit")}</Link>
-            <div className="flex gap-2">
-              <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">{t("inactive")}</button>
-              <button className="ad-buttons bg-black text-white">{t("delete")}</button>
+          <div className="flex flex-col space-y-3">
+            <Skeleton className="h-[200px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4" />
+              <Skeleton className="h-4" />
+            </div>
+          </div>
+          <div className="flex flex-col space-y-3">
+            <Skeleton className="h-[200px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4" />
+              <Skeleton className="h-4" />
             </div>
           </div>
         </div>
-      )) : <p className="text-center font-bold font-gothic text-[22px] mt-24">No Ads Yet</p>}
+      )}
+      {!loading &&
+        ads.length > 0 &&
+        ads.map((item, index) => (
+          <div key={index} className="flex flex-col lg:flex-row gap-4 justify-between mb-8">
+            <div className="flex flex-col lg:flex-row gap-3">
+              <img src={item.image} alt="ad" className="" />
+              <div className="">
+                <h3 className="font-bold text-greyColor text-lg lg:text-[22px] mb-3">{item.title}</h3>
+                <p className="text-black text-lg lg:text-[22px] font-bold">{item.type}</p>
+              </div>
+            </div>
+            <div className="flex flex-col justify-between items-start lg:items-end gap-4">
+              <Link to={`/edit-ad/${index}`} className="text-redColor font-bold text-lg lg:text-[22px]">
+                {t("view&Edit")}
+              </Link>
+              <div className="flex gap-2">
+                <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">{t("inactive")}</button>
+                <button className="ad-buttons bg-black text-white">{t("delete")}</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      {!loading && ads.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">No Ads Yet</p>}
     </main>
   );
 };

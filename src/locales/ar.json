@@ -92,5 +92,16 @@
   "signedUp": "تم التسجيل بنجاح",
   "incorrectEmail/Password": "البريد الإلكتروني أو كلمة المرور غير صجيجة",
   "deleteAccountHeader": "هل أنت متأكد أنك تريد حذف هذا الحساب؟ لا يمكن التراجع عن هذا الإجراء.",
-  "cancel": "إلغاء"
+  "cancel": "إلغاء",
+  "noProperties": "لم يتم العثور على عقارات",
+  "noAdsYet": "لا توجد إعلانات بعد",
+  "overview": "نظرة عامة",
+  "description": "الوصف",
+  "allIncluded": "كل شيء متضمن",
+  "none": "لا شيء",
+  "bedrooms": "غرف نوم",
+  "bathrooms": "حمامات",
+  "details": "التفاصيل",
+  "price": "السعر",
+  "relatedTo": "متعلق بخيارك"
 }
