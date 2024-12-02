@@ -12,7 +12,7 @@ import share from "/assets/share.svg";
 
 
 const PropertiesGrid: React.FC<PropertiesGridProps> = (props) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <div dir={i18n.language === "ar" ? "rtl" : "ltr"} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-6 font-gothic mx-auto">
@@ -22,7 +22,7 @@ const PropertiesGrid: React.FC<PropertiesGridProps> = (props) => {
             <div className="flex justify-between items-center">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl capitalize">For {item.type}</div>
               <div className="text-redColor flex items-center gap-2">
-                <i className={`fa-heart text-xl ${item.favorite ? "fa-solid" : "fa-regular "}`}></i>
+                <i className={`fa-heart text-xl ${item.isFavorite ? "fa-solid" : "fa-regular "}`}></i>
                 <img src={share} className="size-[23px]" alt="" />
               </div>
             </div>

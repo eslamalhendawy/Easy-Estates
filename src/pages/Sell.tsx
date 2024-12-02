@@ -1,5 +1,7 @@
 // @ts-nocheck
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Sell = () => {
@@ -13,20 +15,43 @@ const Sell = () => {
   const [city, setCity] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     document.title = `Easy Estates | Sell`;
     window.scrollTo(0, 0);
   }, []);
 
-  const typeList = ["town house", "modern villa", "apartment", "office", "single family"];
+  const typeList = [
+    {
+      id: "6735ffbed6fe38c6707fa922",
+      title: "Town House",
+      titleArabic: "بيت مدينة",
+    },
+    {
+      id: "6735ffd2d6fe38c6707fa928",
+      title: "Modern Villa",
+      titleArabic: "فيلا حديثة",
+    },
+    {
+      id: "67352d39879e1fe1b067d628",
+      title: "Apartment",
+      titleArabic: "شقة",
+    },
+    {
+      id: "6735ffe1d6fe38c6707fa92b",
+      title: "Office",
+      titleArabic: "مكتب",
+    },
+    {
+      id: "6735ffe9d6fe38c6707fa92e",
+      title: "Single Family",
+      titleArabic: "عائلة واحدة",
+    },
+  ];
   const governorates = ["Cairo, Egypt", "Giza, Egypt", "Alexandria, Egypt", "Dakahlia, Egypt", "Red Sea, Egypt", "Beheira, Egypt", "Fayoum, Egypt", "Gharbia, Egypt", "Ismailia, Egypt", "Monufia, Egypt", "Minya, Egypt", "Qalyubia, Egypt", "New Valley, Egypt", "Suez, Egypt", "Aswan, Egypt", "Assiut, Egypt", "Beni Suef, Egypt", "Port Said, Egypt", "Damietta, Egypt", "Sharqia, Egypt", "South Sinai, Egypt", "Kafr El Sheikh, Egypt", "Matruh, Egypt", "Luxor, Egypt", "Qena, Egypt", "North Sinai, Egypt", "Sohag, Egypt"];
 
-  interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {
-    target: HTMLInputElement & EventTarget;
-  }
-
-  const handleFileChange = (event: FileChangeEvent): void => {
+  const handleFileChange = (event) => {
     const file = event.target.files?.[0];
     if (file) {
       // Convert the file to a data URL
@@ -44,23 +69,23 @@ const Sell = () => {
   };
 
   return (
-    <main className="container mx-auto px-2 sm:px-8 xl:px-24 py-8 minHeight font-gothic">
-      <h1 className="font-goldman font-bold text-xl md:text-[32px] xl:text-[45px] mb-8">Post Your Ad</h1>
+    <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-24 py-8 minHeight font-gothic">
+      <h1 className="font-goldman font-bold text-xl md:text-[32px] xl:text-[45px] mb-8">{t("postYourAd")}</h1>
       <div className="border border-lightGrey my-8 rounded-xl mx-auto lg:mx-12 xl:mx-24">
         {/* Type */}
         <div className="p-6 flex flex-col  gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Type*</span>
-          <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-2">
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("type")}*</span>
+          <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4">
             {typeList.map((item, index) => (
-              <button key={index} onClick={() => setType(item)} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 mr-4 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${item === type ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
-                {item}
+              <button key={index} onClick={() => setType(item.id)} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${item === type ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
+                {i18n.language === "ar" ? item.titleArabic : item.title}
               </button>
             ))}
           </div>
         </div>
         {/* Upload Images */}
         <div className="p-6 flex flex-col gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Upload Images*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("uploadImages")}*</span>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 gap-2 xl:gap-6 grow">
             <input ref={fileInput} onChange={handleFileChange} type="file" className="hidden" />
             <button onClick={() => fileInput.current?.click()} className="bg-lightGrey w-[100px] h-[60px] rounded-xl text-[32px]">
@@ -71,43 +96,44 @@ const Sell = () => {
             ))}
           </div>
         </div>
+        {/* Category */}
         <div className="px-6 pb-3 pt-6 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Category*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("category")}*</span>
           <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-2">
-            <button onClick={() => setCategory("sell")} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 mr-4 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${category === "sell" ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
-              For Sell
+            <button onClick={() => setCategory("sell")} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${category === "sell" ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
+              {t("forSale")}
             </button>
             <button onClick={() => setCategory("rent")} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 mr-4 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${category === "rent" ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
-              For Rent
+              {t("forRent")}
             </button>
           </div>
         </div>
         {/* Area */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Area (m2)*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("area")} (m2)*</span>
           <div className="grow">
-            <input placeholder="Enter Area (m2)" onChange={(e) => setArea(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
+            <input placeholder={t("enterAreaM2")} onChange={(e) => setArea(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
           </div>
         </div>
         {/* Furniture */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Furniture*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("furniture")}*</span>
           <div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-2">
-            <button onClick={() => setFurniture("included")} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 mr-4 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${furniture === "included" ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
-              Included
+            <button onClick={() => setFurniture("included")} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${furniture === "included" ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
+              {t("included")}
             </button>
             <button onClick={() => setFurniture("none")} className={`border border-lightGrey rounded-lg px-2 md:px-8 py-3 mr-4 capitalize font-semibold hover:bg-veryDarkGrey hover:text-white duration-200 text-[12px] lg:text-[14px] ${furniture === "none" ? "bg-veryDarkGrey text-white" : "text-darkGrey"}`}>
-              None
+              {t("none")}
             </button>
           </div>
         </div>
         {/* Bedrooms */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Bedrooms*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("bedrooms")}*</span>
           <div className="grow">
             <Select onValueChange={(e) => setBedrooms(e)}>
-              <SelectTrigger className="basis-1/3 outline-none">
-                <SelectValue placeholder="Select Bedrooms" />
+              <SelectTrigger dir={i18n.language === "ar" ? "rtl" : "ltr"} className="basis-1/3 outline-none">
+                <SelectValue placeholder={t("selectBedrooms")} />
               </SelectTrigger>
               <SelectContent className="outline-none">
                 <SelectGroup>
@@ -124,11 +150,11 @@ const Sell = () => {
         </div>
         {/* Bathrooms */}
         <div className="px-6 pb-6 flex flex-col gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Bathrooms*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("bathrooms")}*</span>
           <div className="grow">
             <Select onValueChange={(e) => setBathrooms(e)}>
-              <SelectTrigger className="basis-1/3 outline-none">
-                <SelectValue placeholder="Select Bathrooms" />
+              <SelectTrigger dir={i18n.language === "ar" ? "rtl" : "ltr"} className="basis-1/3 outline-none">
+                <SelectValue placeholder={t("selectBathrooms")} />
               </SelectTrigger>
               <SelectContent className="outline-none">
                 <SelectGroup>
@@ -143,57 +169,57 @@ const Sell = () => {
         </div>
         {/* City */}
         <div className="px-6 pb-3 pt-6 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">City*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("city")}*</span>
           <div className="grow">
-            <input placeholder="Enter City" onChange={(e) => setCity(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
+            <input placeholder={t("enterCity")} onChange={(e) => setCity(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
           </div>
         </div>
         {/* Location */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Location*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("location")}*</span>
           <div className="grow">
-            <input placeholder="Enter Country" onChange={(e) => setLocation(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
+            <input placeholder={t("selectLocation")} onChange={(e) => setLocation(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
           </div>
         </div>
         {/* Phone Number */}
-        <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0 md:items-center">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Phone Number*</span>
+        <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("phoneNumber")}*</span>
           <div className="grow">
-            <div className="grow flex gap-2 mb-2">
+            <div className={`grow flex gap-2 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
               <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
                 <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" placeholder="+20" />
               </div>
-              <input placeholder="Enter Number" type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
+              <input placeholder={t("enterPhoneNumber")} type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
             </div>
-            <button className="block ml-auto text-redColor font-bold">Use My Number</button>
+            <button className="block ml-auto text-redColor font-bold">{t("useMyNumber")}</button>
           </div>
         </div>
         {/* Price */}
         <div className="px-6 pb-6 flex flex-col gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Price*</span>
-          <div className="grow flex gap-2">
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("price")}*</span>
+          <div className={`grow flex gap-2 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
             <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
               <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" placeholder="EGP" />
             </div>
-            <input placeholder="Enter Price" type="text" id="price" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
+            <input placeholder={t("enterPrice")} type="text" id="price" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
           </div>
         </div>
         {/* Description */}
         <div className="px-6 pb-3 pt-6 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Description*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("description")}*</span>
           <div className="grow">
-            <textarea placeholder="Describe The Property" className="border resize-none h-[180px] border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200"></textarea>
+            <textarea placeholder={t("describeTheProperty")} className="border resize-none h-[180px] border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200"></textarea>
           </div>
         </div>
         {/* Title */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">Title*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("title")}*</span>
           <div className="grow">
-            <input placeholder="Enter Title" type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
+            <input placeholder={t("enterTitle")} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
           </div>
         </div>
         {/* Location */}
-        <div className="px-6 pb-6 flex flex-col gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
+        {/* <div className="px-6 pb-6 flex flex-col gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
           <span className="text-darkGrey font-bold text-lg basis-1/3">Location*</span>
           <div className="grow">
             <Select onValueChange={(e) => setBathrooms(e)}>
@@ -211,10 +237,10 @@ const Sell = () => {
               </SelectContent>
             </Select>
           </div>
-        </div>
+        </div> */}
         {/* Button */}
         <div className="p-8 flex justify-end">
-          <button className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">Post Now</button>
+          <button className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">{t("postNow")}</button>
         </div>
       </div>
     </main>

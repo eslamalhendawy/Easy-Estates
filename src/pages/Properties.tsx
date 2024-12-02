@@ -23,7 +23,7 @@ const Properties = () => {
 
   useEffect(() => {
     const fetchProperties = async () => {
-      const response = await getData("/properties");
+      const response = await getData("/properties", localStorage.getItem("token"));
       setProperties(response.data);
       setLoading(false); 
     };

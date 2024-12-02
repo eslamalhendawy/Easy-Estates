@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 
-import { getData } from "@/lib/apiCalls";
+import { getData, putData, deleteData } from "@/lib/apiCalls";
 
 import PictureCarousel from "@/components/PictureCarousel";
 import RelatedCarousel from "@/components/RelatedCarousel";
@@ -21,19 +21,33 @@ const Property = () => {
   const { id } = useParams();
   const [property, setProperty] = useState({});
   const [loading, setLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchProperty = async () => {
-      const response = await getData(`/properties/${id}`);
-      console.log(response);
-
+      const response = await getData(`/properties/${id}`, localStorage.getItem("token"));
       setProperty(response.data);
+      setIsFavorite(response.data.isFavorite);
       setLoading(false);
     };
     fetchProperty();
   }, [id]);
+
+  const toggleFavorite = async () => {
+    if (isFavorite) {
+      const response = await deleteData(`/properties/favorite/${id}`, localStorage.getItem("token"));
+      if (response.status === "success") {
+        setIsFavorite(false);
+      }
+    } else {
+      const response = await putData(`/properties/favorite/${id}`, {}, localStorage.getItem("token"));
+      if (response.status === "success") {
+        setIsFavorite(true);
+      }
+    }
+  };
 
   return (
     <section dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
@@ -48,7 +62,9 @@ const Property = () => {
             <div className="flex justify-between items-center">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl">For Rent</div>
               <div className="text-redColor flex items-center gap-2">
-                <i className={`fa-heart text-xl fa-regular`}></i>
+                <button onClick={toggleFavorite} className="p-2">
+                  <i className={`fa-heart text-xl ${isFavorite ? "fa-solid" : "fa-regular"}`}></i>
+                </button>
                 <img src={share} className="size-[23px]" alt="" />
               </div>
             </div>
@@ -84,11 +100,23 @@ const Property = () => {
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 border border-[#D9D9D9] px-2 sm:px-6 py-3 rounded-xl">
               <img className="size-[25px]" src={bed} alt="" />
-              {loading ? <Skeleton className="rounded-xl h-full w-[150px]" /> : <span className="capitalize">{property.bedrooms} {t("bedrooms")}</span>}
+              {loading ? (
+                <Skeleton className="rounded-xl h-full w-[150px]" />
+              ) : (
+                <span className="capitalize">
+                  {property.bedrooms} {t("bedrooms")}
+                </span>
+              )}
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 border border-[#D9D9D9] px-2 sm:px-6 py-3 rounded-xl">
               <img className="size-[25px]" src={bathroom} alt="" />
-              {loading ? <Skeleton className="rounded-xl h-full w-[150px]" /> : <span className="capitalize">{property.bathrooms} {t("bathrooms")}</span>}
+              {loading ? (
+                <Skeleton className="rounded-xl h-full w-[150px]" />
+              ) : (
+                <span className="capitalize">
+                  {property.bathrooms} {t("bathrooms")}
+                </span>
+              )}
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 border border-[#D9D9D9] px-2 sm:px-6 py-3 rounded-xl">
               <img className="size-[25px]" src={area} alt="" />
