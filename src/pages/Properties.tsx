@@ -45,7 +45,7 @@ const Properties = () => {
             <input className="outline-none" type="text" placeholder={t("filterBy")} />
           </div>
           <button className="bg-black hover:bg-[#403d39] duration-200 py-2 px-2 rounded-xl flex items-center justify-center gap-2 xl:w-[20%]">
-            <img className="size-[20px]" src={filter} alt="" />
+            <img className="size-[20px]" src={filterIcon} alt="" />
             <span className="text-white font-semibold ">{t("filter")}</span>
           </button>
         </div>

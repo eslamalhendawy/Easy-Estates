@@ -129,5 +129,8 @@
   "selectLocation": "Select Location",
   "postNow": "Post Now",
   "filterBy": "Filter By Governorate",
-  "filter": "Filter"
+  "filter": "Filter",
+  "address": "Address",
+  "enterAddress": "Enter Address",
+  "maxImages": "Maximum 5 images"
 }

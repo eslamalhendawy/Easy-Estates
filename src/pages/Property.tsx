@@ -25,6 +25,10 @@ const Property = () => {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
+    document.title = `Easy Estates | ${loading ? "Property" : property.title}`;
+  }, [loading, property]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     const fetchProperty = async () => {
       const response = await getData(`/properties/${id}`, localStorage.getItem("token"));

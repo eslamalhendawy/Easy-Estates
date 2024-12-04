@@ -129,5 +129,8 @@
   "selectLocation": "اختر الموقع",
   "postNow": "نشر الآن",
   "filterBy": "تصفية حسب المحافظة",
-  "filter": "تصفية"
+  "filter": "تصفية",
+  "address": "العنوان",
+  "enterAddress": "أدخل العنوان",
+  "maxImages": "الحد الأقصى 5 صور"
 }
