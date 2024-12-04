@@ -127,5 +127,7 @@
   "title": "Title",
   "enterTitle": "Enter Title",
   "selectLocation": "Select Location",
-  "postNow": "Post Now"
+  "postNow": "Post Now",
+  "filterBy": "Filter By Governorate",
+  "filter": "Filter"
 }

@@ -127,5 +127,7 @@
   "title": "الاسم",
   "enterTitle": "أدخل الاسم",
   "selectLocation": "اختر الموقع",
-  "postNow": "نشر الآن"
+  "postNow": "نشر الآن",
+  "filterBy": "تصفية حسب المحافظة",
+  "filter": "تصفية"
 }

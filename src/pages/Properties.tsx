@@ -2,18 +2,23 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Skeleton } from "@/components/ui/skeleton";
 
 import { getData } from "@/lib/apiCalls";
+
+import { Skeleton } from "@/components/ui/skeleton";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 import PropertiesGrid from "@/components/PropertiesGrid";
 
 import locationDot from "/assets/locationDot.svg";
-import filter from "/assets/filter.svg";
+import filterIcon from "/assets/filter.svg";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -25,6 +30,7 @@ const Properties = () => {
     const fetchProperties = async () => {
       const response = await getData("/properties", localStorage.getItem("token"));
       setProperties(response.data);
+      setFilteredProperties(response.data);
       setLoading(false); 
     };
     fetchProperties();
@@ -36,11 +42,11 @@ const Properties = () => {
         <div className="flex items-center justify-between gap-2 border border-greyColor rounded-xl lg:w-[40%] 2xl:w-[30%]">
           <div className={`flex items-center gap-2 ${i18n.language === "ar" ? "mr-2" : "ml-2"}`}>
             <img src={locationDot} alt="" />
-            <input className="outline-none" type="text" placeholder="Filter By Location" />
+            <input className="outline-none" type="text" placeholder={t("filterBy")} />
           </div>
           <button className="bg-black hover:bg-[#403d39] duration-200 py-2 px-2 rounded-xl flex items-center justify-center gap-2 xl:w-[20%]">
             <img className="size-[20px]" src={filter} alt="" />
-            <span className="text-white font-semibold ">Filter</span>
+            <span className="text-white font-semibold ">{t("filter")}</span>
           </button>
         </div>
       </div>
@@ -104,8 +110,8 @@ const Properties = () => {
           </div>
         </div>
       )}
-      {!loading && properties.length !== 0 && <PropertiesGrid list={properties} />}
-      {!loading && properties.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noProperties")}</p>}
+      {!loading && filteredProperties.length !== 0 && <PropertiesGrid list={filteredProperties} />}
+      {!loading && filteredProperties.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noProperties")}</p>}
     </main>
   );
 };
