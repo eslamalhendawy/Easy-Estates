@@ -94,3 +94,7 @@ body {
 .accordion-shadow{
   box-shadow: -2px 2px 8px 0px #0000001A;
 }
+
+.leaflet-container{
+  z-index: 1;
+}

@@ -92,22 +92,22 @@ const SignUp = () => {
           <label htmlFor="username" className="font-semibold text-lg">
             {t("username")}
           </label>
-          <input onChange={(e) => setUserName(e.target.value)} type="text" id="username" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          <input onChange={(e) => setUserName(e.target.value)} type="text" id="username" className="border-[1.5px] border-[#CCC5B9] p-2 rounded-xl outline-none focus:border-black duration-200" />
         </div>
         {/* Email */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <label htmlFor="email" className="font-semibold text-lg">
             {t("email")}
           </label>
-          <input onChange={(e) => setEmail(e.target.value)} type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          <input onChange={(e) => setEmail(e.target.value)} type="text" id="email" className="border-[1.5px] border-[#CCC5B9] p-2 rounded-xl outline-none focus:border-black duration-200" />
         </div>
         {/* Phone */}
         <div className="flex flex-col gap-4 font-gothic lg:w-[80%] mx-auto mb-6">
           <label htmlFor="phone" className="font-semibold text-lg">
             {t("phoneNumber")}
           </label>
-          <div className={`flex gap-2 basis-1/2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
-            <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
+          <div className={`flex flex-col gap-2 basis-1/2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
+            <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[60px] flex items-center justify-center">
               <input
                 onChange={(e) => {
                   const value = e.target.value.replace("+", "").trim(); // Remove the "+" if present
@@ -116,11 +116,11 @@ const SignUp = () => {
                 type="text"
                 id="countryCode"
                 dir="ltr"
-                className="outline-none focus:border-darkGrey duration-200 w-[30px]"
+                className="outline-none focus:border-darkGrey duration-200 w-[40px] p-1"
                 value={`+${countryCode}`}
               />
             </div>
-            <input onChange={(e) => setPhone(e.target.value)} value={phone} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200 grow" />
+            <input onChange={(e) => setPhone(e.target.value)} value={phone} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-2 rounded-xl outline-none focus:border-black duration-200" />
           </div>
         </div>
         {/* Password */}
@@ -134,7 +134,7 @@ const SignUp = () => {
               <span>{hidden ? t("show") : t("hide")}</span>
             </button>
           </div>
-          <input onChange={(e) => setPassword(e.target.value)} type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-3 rounded-xl outline-none focus:border-black duration-200" />
+          <input onChange={(e) => setPassword(e.target.value)} type={hidden ? "password" : "text"} id="password" className="border-[1.5px] border-[#CCC5B9] p-2 rounded-xl outline-none focus:border-black duration-200" />
           <p className="text-[#666666] text-sm">{t("use8")}</p>
         </div>
 
