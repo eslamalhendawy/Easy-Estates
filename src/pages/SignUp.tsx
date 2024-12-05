@@ -106,7 +106,7 @@ const SignUp = () => {
           <label htmlFor="phone" className="font-semibold text-lg">
             {t("phoneNumber")}
           </label>
-          <div className={`flex flex-col gap-2 basis-1/2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
+          <div className={`flex flex-col sm:flex-row gap-2 basis-1/2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
             <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[60px] flex items-center justify-center">
               <input
                 onChange={(e) => {
@@ -120,7 +120,7 @@ const SignUp = () => {
                 value={`+${countryCode}`}
               />
             </div>
-            <input onChange={(e) => setPhone(e.target.value)} value={phone} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-2 rounded-xl outline-none focus:border-black duration-200" />
+            <input onChange={(e) => setPhone(e.target.value)} value={phone} type="text" id="phone" className="border-[1.5px] border-[#CCC5B9] p-2 rounded-xl outline-none focus:border-black duration-200 sm:grow" />
           </div>
         </div>
         {/* Password */}
