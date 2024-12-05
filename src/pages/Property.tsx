@@ -17,10 +17,22 @@ import bathroom from "/assets/bathroom.svg";
 import area from "/assets/area.svg";
 import location from "/assets/location.svg";
 
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
+
 const Property = () => {
   const { id } = useParams();
   const [property, setProperty] = useState({});
   const [loading, setLoading] = useState(true);
+  const [position, setPosition] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
   const { t, i18n } = useTranslation();
 
@@ -33,6 +45,7 @@ const Property = () => {
     const fetchProperty = async () => {
       const response = await getData(`/properties/${id}`, localStorage.getItem("token"));
       setProperty(response.data);
+      setPosition({ lat: response.data.location.coordinates[0], lng: response.data.location.coordinates[1] });
       setIsFavorite(response.data.isFavorite);
       setLoading(false);
     };
@@ -167,8 +180,23 @@ const Property = () => {
         <PictureCarousel list={property.images} />
       )}
 
+      {/* Location */}
+      {position.lat && position.lng && (
+        <>
+          <h5 className="font-bold font-gothic text-[25px] md:text-[32px] text-darkGrey mb-6">{t("location")}</h5>
+          {loading ? (
+            <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full mb-8" />
+          ) : (
+            <MapContainer center={[position.lat, position.lng]} zoom={8} style={{ height: "500px", width: "100%" }}>
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors" />
+              <Marker position={[position.lat, position.lng]} />
+            </MapContainer>
+          )}
+        </>
+      )}
+
       {/* Related Carousel */}
-      <h5 className="font-bold font-gothic text-[25px] md:text-[32px] text-darkGrey mb-6">{t("relatedTo")}</h5>
+      <h6 className="font-bold font-gothic text-[25px] md:text-[32px] text-darkGrey mb-6">{t("relatedTo")}</h6>
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full" />

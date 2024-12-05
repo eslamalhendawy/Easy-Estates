@@ -1,11 +1,23 @@
 // @ts-nocheck
 import { useState, useRef, useEffect } from "react";
+import { useAppContext } from "@/Context/AppContext";
 import { useTranslation } from "react-i18next";
 
 import { postData } from "@/lib/apiCalls";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
 
 const Sell = () => {
   const [title, setTitle] = useState("");
@@ -20,6 +32,9 @@ const Sell = () => {
   const [images, setImages] = useState([]);
   const [type, setType] = useState("");
   const [city, setCity] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [position, setPosition] = useState(null);
+  const { userData } = useAppContext();
 
   const [imagePreviews, setImagePreviews] = useState([]);
 
@@ -73,7 +88,35 @@ const Sell = () => {
     },
   ];
 
-  const governorates = ["Cairo, Egypt", "Giza, Egypt", "Alexandria, Egypt", "Dakahlia, Egypt", "Red Sea, Egypt", "Beheira, Egypt", "Fayoum, Egypt", "Gharbia, Egypt", "Ismailia, Egypt", "Monufia, Egypt", "Minya, Egypt", "Qalyubia, Egypt", "New Valley, Egypt", "Suez, Egypt", "Aswan, Egypt", "Assiut, Egypt", "Beni Suef, Egypt", "Port Said, Egypt", "Damietta, Egypt", "Sharqia, Egypt", "South Sinai, Egypt", "Kafr El Sheikh, Egypt", "Matruh, Egypt", "Luxor, Egypt", "Qena, Egypt", "North Sinai, Egypt", "Sohag, Egypt"];
+  const governorates = [
+    { name: "Cairo", arabic: "القاهرة" },
+    { name: "Giza", arabic: "الجيزة" },
+    { name: "Alexandria", arabic: "الإسكندرية" },
+    { name: "Dakahlia", arabic: "الدقهلية" },
+    { name: "Red Sea", arabic: "البحر الأحمر" },
+    { name: "Beheira", arabic: "البحيرة" },
+    { name: "Fayoum", arabic: "الفيوم" },
+    { name: "Gharbia", arabic: "الغربية" },
+    { name: "Ismailia", arabic: "الإسماعيلية" },
+    { name: "Monufia", arabic: "المنوفية" },
+    { name: "Minya", arabic: "المنيا" },
+    { name: "Qalyubia", arabic: "القليوبية" },
+    { name: "New Valley", arabic: "الوادي الجديد" },
+    { name: "Suez", arabic: "السويس" },
+    { name: "Aswan", arabic: "أسوان" },
+    { name: "Assiut", arabic: "أسيوط" },
+    { name: "Beni Suef", arabic: "بني سويف" },
+    { name: "Port Said", arabic: "بورسعيد" },
+    { name: "Damietta", arabic: "دمياط" },
+    { name: "Sharqia", arabic: "الشرقية" },
+    { name: "South Sinai", arabic: "جنوب سيناء" },
+    { name: "Kafr El Sheikh", arabic: "كفر الشيخ" },
+    { name: "Matruh", arabic: "مطروح" },
+    { name: "Luxor", arabic: "الأقصر" },
+    { name: "Qena", arabic: "قنا" },
+    { name: "North Sinai", arabic: "شمال سيناء" },
+    { name: "Sohag", arabic: "سوهاج" },
+  ];
 
   const handleImageButtonClick = () => {
     if (images.length === 5) {
@@ -100,9 +143,18 @@ const Sell = () => {
     setImages((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
+  const LocationMarker = () => {
+    useMapEvents({
+      click(e) {
+        setPosition(e.latlng);
+      },
+    });
+
+    return position ? <Marker position={position}></Marker> : null;
+  };
+
   const handleClick = async () => {
-    console.log(title, description, price, address, bedrooms, bathrooms, squareFootage, propertyType, furniture, type, images);
-    if (!title || !description || !price || !address || !propertyType || !furniture || !squareFootage || !bedrooms || !bathrooms || !images || !type || !city) {
+    if (!propertyType || !images || !type || !squareFootage || !furniture || !bedrooms || !bathrooms || !city || !position || !address || !phoneNumber || !price || !description || !title) {
       toast({ title: t("fillAllFields"), variant: "destructive" });
       return;
     }
@@ -110,7 +162,25 @@ const Sell = () => {
     images.forEach((file, index) => {
       formData.append(`image_${index}`, file);
     });
+    const data = {
+      title,
+      description,
+      price,
+      address,
+      bedrooms,
+      bathrooms,
+      squareFootage,
+      propertyType,
+      furniture,
+      type,
+      images,
+      city,
+      location: { coordinates: [position.lat, position.lng] },
+    };
+    const response = await postData("/properties", data, localStorage.getItem("token"));
+    console.log(response);
   };
+
   return (
     <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-24 py-8 minHeight font-gothic">
       <h1 className="font-goldman font-bold text-xl md:text-[32px] xl:text-[45px] mb-8">{t("postYourAd")}</h1>
@@ -211,29 +281,32 @@ const Sell = () => {
         </div>
         {/* City */}
         <div className="px-6 pb-3 pt-6 flex flex-col gap-2 md:flex-row md:gap-0">
-          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("city")}*</span>
+          <span className="text-darkGrey font-bold text-lg basis-1/3">{t("governorate")}*</span>
           <div className="grow">
-            <input placeholder={t("enterCity")} onChange={(e) => setCity(e.target.value)} type="text" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
+            <Select onValueChange={(e) => setCity(e)}>
+              <SelectTrigger className="basis-1/3 outline-none">
+                <SelectValue placeholder={t("selectGovernorate")} />
+              </SelectTrigger>
+              <SelectContent className="outline-none">
+                <SelectGroup>
+                  {governorates.map((governorate, index) => (
+                    <SelectItem key={index} value={governorate.name}>
+                      {i18n.language === "ar" ? governorate.arabic : governorate.name}, {i18n.language === "ar" ? "مصر" : "Egypt"}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
         {/* Location */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
           <span className="text-darkGrey font-bold text-lg basis-1/3">{t("location")}*</span>
           <div className="grow">
-            <Select onValueChange={(e) => setBathrooms(e)}>
-              <SelectTrigger className="basis-1/3 outline-none">
-                <SelectValue placeholder={t("selectLocation")} />
-              </SelectTrigger>
-              <SelectContent className="outline-none">
-                <SelectGroup>
-                  {governorates.map((governorate) => (
-                    <SelectItem key={governorate} value={governorate}>
-                      {governorate}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <MapContainer center={[26.8206, 30.8025]} zoom={6} style={{ height: "500px", width: "100%" }}>
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors" />
+              <LocationMarker />
+            </MapContainer>
           </div>
         </div>
         {/* Address */}
@@ -249,11 +322,13 @@ const Sell = () => {
           <div className="grow">
             <div className={`grow flex gap-2 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
               <div className="border border-[#D9D9D9] px-2 py-1 rounded-lg w-[50px] flex items-center justify-center">
-                <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" placeholder="+20" />
+                <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" disabled={true} value="+20" />
               </div>
-              <input placeholder={t("enterPhoneNumber")} type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
+              <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder={t("enterPhoneNumber")} type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-1 rounded-lg grow focus:border-darkGrey duration-200" />
             </div>
-            <button className="block ml-auto text-redColor font-bold">{t("useMyNumber")}</button>
+            <button onClick={() => setPhoneNumber(userData.phone)} className="block ml-auto text-redColor font-bold">
+              {t("useMyNumber")}
+            </button>
           </div>
         </div>
         {/* Price */}

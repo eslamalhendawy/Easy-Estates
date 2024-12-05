@@ -132,5 +132,7 @@
   "filter": "تصفية",
   "address": "العنوان",
   "enterAddress": "أدخل العنوان",
-  "maxImages": "الحد الأقصى 5 صور"
+  "maxImages": "الحد الأقصى 5 صور",
+  "governorate": "المحافظة",
+  "selectGovernorate": "اختر المحافظة"
 }

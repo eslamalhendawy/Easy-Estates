@@ -132,5 +132,7 @@
   "filter": "Filter",
   "address": "Address",
   "enterAddress": "Enter Address",
-  "maxImages": "Maximum 5 images"
+  "maxImages": "Maximum 5 images",
+  "governorate": "Governorate",
+  "selectGovernorate": "Select Governorate"
 }
