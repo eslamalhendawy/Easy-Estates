@@ -159,25 +159,24 @@ const Sell = () => {
       return;
     }
     const formData = new FormData();
-    images.forEach((file, index) => {
-      formData.append(`image_${index}`, file);
+    images.forEach((file) => {
+      formData.append(`images`, file);
     });
-    const data = {
-      title,
-      description,
-      price,
-      address,
-      bedrooms,
-      bathrooms,
-      squareFootage,
-      propertyType,
-      furniture,
-      type,
-      images,
-      city,
-      location: { coordinates: [position.lat, position.lng] },
-    };
-    const response = await postData("/properties", data, localStorage.getItem("token"));
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("address", address);
+    formData.append("bedrooms", bedrooms);
+    formData.append("bathrooms", bathrooms);
+    formData.append("squareFootage", squareFootage);
+    formData.append("propertyType", propertyType);
+    formData.append("furniture", furniture);
+    formData.append("type", type);
+    formData.append("city", city);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("location", [position.lat, position.lng]);
+    const response = await postData("/properties", formData, localStorage.getItem("token"));
     console.log(response);
   };
 
