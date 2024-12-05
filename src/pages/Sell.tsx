@@ -162,7 +162,6 @@ const Sell = () => {
     images.forEach((file) => {
       formData.append(`images`, file);
     });
-
     formData.append("title", title);
     formData.append("description", description);
     formData.append("price", price);
@@ -175,7 +174,8 @@ const Sell = () => {
     formData.append("type", type);
     formData.append("city", city);
     formData.append("phoneNumber", phoneNumber);
-    formData.append("location", [position.lat, position.lng]);
+    formData.append("location.coordinates[0]", position.lat);
+    formData.append("location.coordinates[1]", position.lng);
     const response = await postData("/properties", formData, localStorage.getItem("token"));
     console.log(response);
   };

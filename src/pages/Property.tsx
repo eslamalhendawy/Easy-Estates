@@ -44,8 +44,6 @@ const Property = () => {
     window.scrollTo(0, 0);
     const fetchProperty = async () => {
       const response = await getData(`/properties/${id}`, localStorage.getItem("token"));
-      console.log(response);
-      
       setProperty(response.data);
       setPosition({ lat: response.data.location.coordinates[0], lng: response.data.location.coordinates[1] });
       setIsFavorite(response.data.isFavorite);

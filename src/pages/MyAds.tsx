@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { getData } from "@/lib/apiCalls";
-
+import { getData, deleteData } from "@/lib/apiCalls";
 
 const MyAds = () => {
   const [ads, setAds] = useState([]);
@@ -22,12 +21,17 @@ const MyAds = () => {
   useEffect(() => {
     const fetchAds = async () => {
       const response = await getData("/properties/me", localStorage.getItem("token"));
+      // console.log(response);
       setAds(response.data);
       setLoading(false);
-      console.log(response);
     };
     fetchAds();
   }, []);
+
+  const handleDelete = async (id) => {
+    await deleteData(`/properties/${id}`, localStorage.getItem("token"));
+    window.location.reload();
+  };
 
   return (
     <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8 minHeight font-gothic">
@@ -74,7 +78,7 @@ const MyAds = () => {
         ads.map((item, index) => (
           <div key={index} className="flex flex-col lg:flex-row gap-4 justify-between mb-8">
             <div className="flex flex-col lg:flex-row gap-3">
-              <img src={item.image} alt="ad" className="" />
+              <img src={item.images[0]} alt="ad" className="w-[450px] h-[180px] rounded-lg" />
               <div className="">
                 <h3 className="font-bold text-greyColor text-lg lg:text-[22px] mb-3">{item.title}</h3>
                 <p className="text-black text-lg lg:text-[22px] font-bold">{item.type}</p>
@@ -86,7 +90,9 @@ const MyAds = () => {
               </Link>
               <div className="flex gap-2">
                 <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">{t("inactive")}</button>
-                <button className="ad-buttons bg-black text-white">{t("delete")}</button>
+                <button onClick={() => handleDelete(item._id)} className="ad-buttons bg-black text-white">
+                  {t("delete")}
+                </button>
               </div>
             </div>
           </div>
