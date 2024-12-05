@@ -85,15 +85,15 @@ const MyAds = () => {
               </div>
             </div>
             <div className="flex flex-col justify-between items-start lg:items-end gap-4">
-              <Link to={`/edit-ad/${index}`} className="text-redColor font-bold text-lg lg:text-[22px]">
-                {t("view&Edit")}
-              </Link>
               <div className="flex gap-2">
                 <button className="ad-buttons hover:text-veryDarkGrey hover:border-veryDarkGrey">{t("inactive")}</button>
                 <button onClick={() => handleDelete(item._id)} className="ad-buttons bg-black text-white">
                   {t("delete")}
                 </button>
               </div>
+              <Link to={`/edit-ad/${item._id}`} className="text-redColor font-bold text-lg lg:text-[22px]">
+                {t("view&Edit")}
+              </Link>
             </div>
           </div>
         ))}
