@@ -319,7 +319,7 @@ const Sell = () => {
         {/* Phone Number */}
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
           <span className="text-darkGrey font-bold text-lg basis-1/3">{t("phoneNumber")}*</span>
-          <div className="grow">
+          <div className="md:grow">
             <div className={`grow flex gap-1 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
               <div className="border border-[#D9D9D9] px-1 py-1 rounded-lg w-[50px] flex items-center justify-center">
                 <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" disabled={true} value="+20" />
@@ -334,7 +334,7 @@ const Sell = () => {
         {/* Price */}
         <div className="px-6 pb-6 flex flex-col gap-2 md:flex-row md:gap-0 border-b border-lightGrey">
           <span className="text-darkGrey font-bold text-lg basis-1/3">{t("price")}*</span>
-          <div className={`grow flex gap-1 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
+          <div className={`md:grow flex gap-1 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
             <div className="border border-[#D9D9D9] px-1 py-1 rounded-lg w-[50px] flex items-center justify-center">
               <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" value="EGP" disabled />
             </div>
