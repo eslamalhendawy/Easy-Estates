@@ -82,6 +82,8 @@
   "passwordLength": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
   "passwordMatch": "يجب أن تتطابق كلمات المرور",
   "fillAllFields": "يرجى ملء جميع الحقول",
+  "validArea": "يرجى إدخال مساحة صالحة",
+  "validPrice": "يرجى إدخال سعر صالح",
   "validPhone": "يرجى إدخال رقم هاتف صالح",
   "validEmail": "يرجى إدخال عنوان بريد إلكتروني صالح",
   "userUpdated": "تم تحديث المستخدم بنجاح",
@@ -134,5 +136,7 @@
   "enterAddress": "أدخل العنوان",
   "maxImages": "الحد الأقصى 5 صور",
   "governorate": "المحافظة",
-  "selectGovernorate": "اختر المحافظة"
+  "selectGovernorate": "اختر المحافظة",
+  "propertyPosted": "تم نشر العقار بنجاح",
+  "postingProperty": "نشر العقار يرجى الانتظار"
 }

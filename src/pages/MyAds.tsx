@@ -9,6 +9,7 @@ import { getData, deleteData } from "@/lib/apiCalls";
 
 const MyAds = () => {
   const [ads, setAds] = useState([]);
+  const [filteredAds, setFilteredAds] = useState([]);
   const [selectedTab, setSelectedTab] = useState("active");
   const [loading, setLoading] = useState(true);
   const { t, i18n } = useTranslation();
@@ -21,12 +22,28 @@ const MyAds = () => {
   useEffect(() => {
     const fetchAds = async () => {
       const response = await getData("/properties/me", localStorage.getItem("token"));
-      // console.log(response);
+      console.log(response);
       setAds(response.data);
+      setFilteredAds(response.data);
       setLoading(false);
     };
     fetchAds();
   }, []);
+
+  useEffect(() => {
+    if (selectedTab === "active") {
+      const filtered = ads.filter((item) => item.approved === "active");
+      setFilteredAds(filtered);
+    }
+    if (selectedTab === "inactive") {
+      const filtered = ads.filter((item) => item.approved === "inactive");
+      setFilteredAds(filtered);
+    }
+    if (selectedTab === "pending") {
+      const filtered = ads.filter((item) => item.approved === "pending");
+      setFilteredAds(filtered);
+    }
+  }, [selectedTab, ads]);
 
   const handleDelete = async (id) => {
     await deleteData(`/properties/${id}`, localStorage.getItem("token"));
@@ -75,13 +92,13 @@ const MyAds = () => {
       )}
       {!loading &&
         ads.length > 0 &&
-        ads.map((item, index) => (
-          <div key={index} className="flex flex-col lg:flex-row gap-4 justify-between mb-8">
+        filteredAds.map((item, index) => (
+          <div key={index} className="flex flex-col lg:flex-row gap-4 justify-between mb-8 pb-2 border-b">
             <div className="flex flex-col lg:flex-row gap-3">
               <img src={item.images[0]} alt="ad" className="w-[450px] h-[180px] rounded-lg" />
               <div className="">
-                <h3 className="font-bold text-greyColor text-lg lg:text-[22px] mb-3">{item.title}</h3>
-                <p className="text-black text-lg lg:text-[22px] font-bold">{item.type}</p>
+                <h3 className="font-bold text-greyColor text-lg lg:text-[22px] mb-3 capitalize">{item.title}</h3>
+                <p className="text-black text-lg lg:text-[22px] font-bold capitalize">{item.type}</p>
               </div>
             </div>
             <div className="flex flex-col justify-between items-start lg:items-end gap-4">
@@ -97,7 +114,8 @@ const MyAds = () => {
             </div>
           </div>
         ))}
-      {!loading && ads.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noAdsYet")}</p>}
+      {/* {!loading && ads.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noAdsYet")}</p>} */}
+      {!loading && filteredAds.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noAdsYet")}</p>}
     </main>
   );
 };

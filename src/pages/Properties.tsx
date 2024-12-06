@@ -17,9 +17,39 @@ const Properties = () => {
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState(null);
 
   const { t, i18n } = useTranslation();
+
+  const governorates = [
+    { name: "Cairo, Egypt", arabic: "القاهرة, مصر" },
+    { name: "Giza, Egypt", arabic: "الجيزة, مصر" },
+    { name: "Alexandria, Egypt", arabic: "الإسكندرية, مصر" },
+    { name: "Dakahlia, Egypt", arabic: "الدقهلية, مصر" },
+    { name: "Red Sea, Egypt", arabic: "البحر الأحمر, مصر" },
+    { name: "Beheira, Egypt", arabic: "البحيرة, مصر" },
+    { name: "Fayoum, Egypt", arabic: "الفيوم, مصر" },
+    { name: "Gharbia, Egypt", arabic: "الغربية, مصر" },
+    { name: "Ismailia, Egypt", arabic: "الإسماعيلية, مصر" },
+    { name: "Monufia, Egypt", arabic: "المنوفية, مصر" },
+    { name: "Minya, Egypt", arabic: "المنيا, مصر" },
+    { name: "Qalyubia, Egypt", arabic: "القليوبية, مصر" },
+    { name: "New Valley, Egypt", arabic: "الوادي الجديد, مصر" },
+    { name: "Suez, Egypt", arabic: "السويس, مصر" },
+    { name: "Aswan, Egypt", arabic: "أسوان, مصر" },
+    { name: "Assiut, Egypt", arabic: "أسيوط, مصر" },
+    { name: "Beni Suef, Egypt", arabic: "بني سويف, مصر" },
+    { name: "Port Said, Egypt", arabic: "بورسعيد, مصر" },
+    { name: "Damietta, Egypt", arabic: "دمياط, مصر" },
+    { name: "Sharqia, Egypt", arabic: "الشرقية, مصر" },
+    { name: "South Sinai, Egypt", arabic: "جنوب سيناء, مصر" },
+    { name: "Kafr El Sheikh, Egypt", arabic: "كفر الشيخ, مصر" },
+    { name: "Matruh, Egypt", arabic: "مطروح, مصر" },
+    { name: "Luxor, Egypt", arabic: "الأقصر, مصر" },
+    { name: "Qena, Egypt", arabic: "قنا, مصر" },
+    { name: "North Sinai, Egypt", arabic: "شمال سيناء, مصر" },
+    { name: "Sohag, Egypt", arabic: "سوهاج, مصر" },
+  ];
 
   useEffect(() => {
     document.title = "Easy Estates | Properties";
@@ -29,24 +59,52 @@ const Properties = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       const response = await getData("/properties", localStorage.getItem("token"));
+      console.log(response.data);
+
       setProperties(response.data);
       setFilteredProperties(response.data);
-      setLoading(false); 
+      setLoading(false);
     };
     fetchProperties();
   }, []);
 
+  useEffect(() => {
+    if (filter) {
+      const filtered = properties.filter((property) => property.city === filter);
+      setFilteredProperties(filtered);
+    }else{
+      setFilteredProperties(properties);
+    }
+  }, [filter]);
+
   return (
-    <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
+    <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8 minHeight">
       <div className="flex justify-center font-gothic mb-6">
-        <div className="flex items-center justify-between gap-2 border border-greyColor rounded-xl lg:w-[40%] 2xl:w-[30%]">
-          <div className={`flex items-center gap-2 ${i18n.language === "ar" ? "mr-2" : "ml-2"}`}>
+        <div className="flex items-center justify-between gap-2 border border-greyColor rounded-xl w-[80%]  md:w-[60%] lg:w-[40%] 2xl:w-[30%]">
+          <div className={`flex items-center grow gap-2 ${i18n.language === "ar" ? "mr-2" : "ml-2"}`}>
             <img src={locationDot} alt="" />
-            <input className="outline-none" type="text" placeholder={t("filterBy")} />
+            {/* <input className="outline-none" type="text" placeholder={t("filterBy")} /> */}
+            <Select onValueChange={(e) => setFilter(e)}>
+              <SelectTrigger dir={i18n.language === "ar" ? "rtl" : "ltr"} className="w-full border-none px-0">
+                <SelectValue placeholder={t("selectGovernorate")} />
+              </SelectTrigger>
+              <SelectContent dir={i18n.language === "ar" ? "rtl" : "ltr"}>
+                <SelectGroup>
+                  <SelectItem value={null}>
+                    {t("all")}
+                  </SelectItem>
+                  {governorates.map((governorate, index) => (
+                    <SelectItem key={index} value={governorate.name}>
+                      {i18n.language === "ar" ? governorate.arabic : governorate.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
-          <button className="bg-black hover:bg-[#403d39] duration-200 py-2 px-2 rounded-xl flex items-center justify-center gap-2 xl:w-[20%]">
-            <img className="size-[20px]" src={filterIcon} alt="" />
-            <span className="text-white font-semibold ">{t("filter")}</span>
+          <button className="bg-black h-full px-2 rounded-xl flex items-center justify-center gap-2 xl:w-[20%]">
+            <img className="size-[15px] sm:size-[20px]" src={filterIcon} alt="" />
+            <span className="text-white font-semibold text-xs sm:text-sm">{t("filter")}</span>
           </button>
         </div>
       </div>

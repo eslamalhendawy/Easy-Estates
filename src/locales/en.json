@@ -82,6 +82,8 @@
   "passwordLength": "Password must be at least 8 characters long",
   "passwordMatch": "Passwords must match",
   "fillAllFields": "Please fill all fields",
+  "validArea": "Please enter a valid area",
+  "validPrice": "Please enter a valid price",
   "validPhone": "Please enter a valid phone number",
   "validEmail": "Please enter a valid email address",
   "userUpdated": "User updated successfully",
@@ -94,7 +96,7 @@
   "deleteAccountHeader": "Are you sure you want to delete this account? This action cannot be undone.",
   "cancel": "Cancel",
   "noProperties": "No properties Found",
-  "noAdsYet": "No ads yet",
+  "noAdsYet": "No Ads Yet",
   "overview": "Overview",
   "description": "Description",
   "allIncluded": "All Included",
@@ -134,5 +136,7 @@
   "enterAddress": "Enter Address",
   "maxImages": "Maximum 5 images",
   "governorate": "Governorate",
-  "selectGovernorate": "Select Governorate"
+  "selectGovernorate": "Select Governorate",
+  "propertyPosted": "Property posted successfully",
+  "postingProperty": "Posting Property Please Wait"
 }

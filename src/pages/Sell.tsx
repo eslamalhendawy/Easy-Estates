@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useAppContext } from "@/Context/AppContext";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { postData } from "@/lib/apiCalls";
 
@@ -34,6 +35,7 @@ const Sell = () => {
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [position, setPosition] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { userData } = useAppContext();
 
   const [imagePreviews, setImagePreviews] = useState([]);
@@ -41,6 +43,9 @@ const Sell = () => {
   const fileInput = useRef<HTMLInputElement>(null);
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const regNumbers = /^[0-9]+$/;
 
   useEffect(() => {
     document.title = `Easy Estates | Sell`;
@@ -89,33 +94,33 @@ const Sell = () => {
   ];
 
   const governorates = [
-    { name: "Cairo", arabic: "القاهرة" },
-    { name: "Giza", arabic: "الجيزة" },
-    { name: "Alexandria", arabic: "الإسكندرية" },
-    { name: "Dakahlia", arabic: "الدقهلية" },
-    { name: "Red Sea", arabic: "البحر الأحمر" },
-    { name: "Beheira", arabic: "البحيرة" },
-    { name: "Fayoum", arabic: "الفيوم" },
-    { name: "Gharbia", arabic: "الغربية" },
-    { name: "Ismailia", arabic: "الإسماعيلية" },
-    { name: "Monufia", arabic: "المنوفية" },
-    { name: "Minya", arabic: "المنيا" },
-    { name: "Qalyubia", arabic: "القليوبية" },
-    { name: "New Valley", arabic: "الوادي الجديد" },
-    { name: "Suez", arabic: "السويس" },
-    { name: "Aswan", arabic: "أسوان" },
-    { name: "Assiut", arabic: "أسيوط" },
-    { name: "Beni Suef", arabic: "بني سويف" },
-    { name: "Port Said", arabic: "بورسعيد" },
-    { name: "Damietta", arabic: "دمياط" },
-    { name: "Sharqia", arabic: "الشرقية" },
-    { name: "South Sinai", arabic: "جنوب سيناء" },
-    { name: "Kafr El Sheikh", arabic: "كفر الشيخ" },
-    { name: "Matruh", arabic: "مطروح" },
-    { name: "Luxor", arabic: "الأقصر" },
-    { name: "Qena", arabic: "قنا" },
-    { name: "North Sinai", arabic: "شمال سيناء" },
-    { name: "Sohag", arabic: "سوهاج" },
+    { name: "Cairo, Egypt", arabic: "القاهرة, مصر" },
+    { name: "Giza, Egypt", arabic: "الجيزة, مصر" },
+    { name: "Alexandria, Egypt", arabic: "الإسكندرية, مصر" },
+    { name: "Dakahlia, Egypt", arabic: "الدقهلية, مصر" },
+    { name: "Red Sea, Egypt", arabic: "البحر الأحمر, مصر" },
+    { name: "Beheira, Egypt", arabic: "البحيرة, مصر" },
+    { name: "Fayoum, Egypt", arabic: "الفيوم, مصر" },
+    { name: "Gharbia, Egypt", arabic: "الغربية, مصر" },
+    { name: "Ismailia, Egypt", arabic: "الإسماعيلية, مصر" },
+    { name: "Monufia, Egypt", arabic: "المنوفية, مصر" },
+    { name: "Minya, Egypt", arabic: "المنيا, مصر" },
+    { name: "Qalyubia, Egypt", arabic: "القليوبية, مصر" },
+    { name: "New Valley, Egypt", arabic: "الوادي الجديد, مصر" },
+    { name: "Suez, Egypt", arabic: "السويس, مصر" },
+    { name: "Aswan, Egypt", arabic: "أسوان, مصر" },
+    { name: "Assiut, Egypt", arabic: "أسيوط, مصر" },
+    { name: "Beni Suef, Egypt", arabic: "بني سويف, مصر" },
+    { name: "Port Said, Egypt", arabic: "بورسعيد, مصر" },
+    { name: "Damietta, Egypt", arabic: "دمياط, مصر" },
+    { name: "Sharqia, Egypt", arabic: "الشرقية, مصر" },
+    { name: "South Sinai, Egypt", arabic: "جنوب سيناء, مصر" },
+    { name: "Kafr El Sheikh, Egypt", arabic: "كفر الشيخ, مصر" },
+    { name: "Matruh, Egypt", arabic: "مطروح, مصر" },
+    { name: "Luxor, Egypt", arabic: "الأقصر, مصر" },
+    { name: "Qena, Egypt", arabic: "قنا, مصر" },
+    { name: "North Sinai, Egypt", arabic: "شمال سيناء, مصر" },
+    { name: "Sohag, Egypt", arabic: "سوهاج, مصر" },
   ];
 
   const handleImageButtonClick = () => {
@@ -158,6 +163,20 @@ const Sell = () => {
       toast({ title: t("fillAllFields"), variant: "destructive" });
       return;
     }
+    if(!regNumbers.test(squareFootage)) {
+      toast({ title: t("validArea"), variant: "destructive" });
+      return;
+    }
+    if(!regNumbers.test(phoneNumber) || phoneNumber.length !== 11) {
+      toast({ title: t("validPhone"), variant: "destructive" });
+      return;
+    }
+    if(!regNumbers.test(price)) {
+      toast({ title: t("validPrice"), variant: "destructive" });
+      return;
+    }
+    setLoading(true);
+    toast({ title: t("postingProperty"), variant: "default" });
     const formData = new FormData();
     images.forEach((file) => {
       formData.append(`images`, file);
@@ -177,7 +196,10 @@ const Sell = () => {
     formData.append("location.coordinates[0]", position.lat);
     formData.append("location.coordinates[1]", position.lng);
     const response = await postData("/properties", formData, localStorage.getItem("token"));
-    console.log(response);
+    if(response.data){
+      toast({ title: t("propertyPosted"), variant: "success" });
+      navigate(`/property/${response.data._id}`);
+    }
   };
 
   return (
@@ -246,7 +268,7 @@ const Sell = () => {
               <SelectTrigger dir={i18n.language === "ar" ? "rtl" : "ltr"} className="basis-1/3 outline-none">
                 <SelectValue placeholder={t("selectBedrooms")} />
               </SelectTrigger>
-              <SelectContent className="outline-none">
+              <SelectContent dir={i18n.language === "ar" ? "rtl" : "ltr"} className="outline-none">
                 <SelectGroup>
                   <SelectItem value="1">1</SelectItem>
                   <SelectItem value="2">2</SelectItem>
@@ -267,7 +289,7 @@ const Sell = () => {
               <SelectTrigger dir={i18n.language === "ar" ? "rtl" : "ltr"} className="basis-1/3 outline-none">
                 <SelectValue placeholder={t("selectBathrooms")} />
               </SelectTrigger>
-              <SelectContent className="outline-none">
+              <SelectContent dir={i18n.language === "ar" ? "rtl" : "ltr"} className="outline-none">
                 <SelectGroup>
                   <SelectItem value="1">1</SelectItem>
                   <SelectItem value="2">2</SelectItem>
@@ -283,14 +305,14 @@ const Sell = () => {
           <span className="text-darkGrey font-bold text-lg basis-1/3">{t("governorate")}*</span>
           <div className="grow">
             <Select onValueChange={(e) => setCity(e)}>
-              <SelectTrigger className="basis-1/3 outline-none">
+              <SelectTrigger dir={i18n.language === "ar" ? "rtl" : "ltr"} className="basis-1/3 outline-none">
                 <SelectValue placeholder={t("selectGovernorate")} />
               </SelectTrigger>
-              <SelectContent className="outline-none">
+              <SelectContent dir={i18n.language === "ar" ? "rtl" : "ltr"} className="outline-none">
                 <SelectGroup>
                   {governorates.map((governorate, index) => (
                     <SelectItem key={index} value={governorate.name}>
-                      {i18n.language === "ar" ? governorate.arabic : governorate.name}, {i18n.language === "ar" ? "مصر" : "Egypt"}
+                      {i18n.language === "ar" ? governorate.arabic : governorate.name}
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -356,7 +378,7 @@ const Sell = () => {
         </div>
         {/* Button */}
         <div className="p-8 flex justify-end">
-          <button onClick={handleClick} className="bg-blackColor hover:bg-darkGrey duration-200 text-white py-2 px-6 rounded-lg font-bold">
+          <button disabled={loading} onClick={handleClick} className={`duration-200 text-white py-2 px-6 rounded-lg font-bold ${loading ? "bg-lightGrey" : "bg-blackColor hover:bg-darkGrey"}`}>
             {t("postNow")}
           </button>
         </div>
