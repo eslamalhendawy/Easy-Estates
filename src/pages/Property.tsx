@@ -31,7 +31,9 @@ L.Icon.Default.mergeOptions({
 const Property = () => {
   const { id } = useParams();
   const [property, setProperty] = useState({});
+  const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [position, setPosition] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
   const { t, i18n } = useTranslation();
@@ -51,6 +53,17 @@ const Property = () => {
     };
     fetchProperty();
   }, [id]);
+
+  useEffect(() => {
+    const fetchRelated = async () => {
+      const response = await getData(`/properties?city=${property.city}`, localStorage.getItem("token"));
+      setRelated(response.data);
+      setLoading2(false);
+    };
+    if (property.city) {
+      fetchRelated();
+    }
+  }, [property]);
 
   const toggleFavorite = async () => {
     if (isFavorite) {
@@ -75,8 +88,9 @@ const Property = () => {
             <Skeleton className="rounded-xl min-h-[400px] md:min-h-[750px] h-full w-full" />
           </div>
         ) : (
-          <div className="bg-center bg-cover p-4 basis-1/2 rounded-xl min-h-[400px] md:min-h-[750px]" style={{ backgroundImage: `url(${property.images[0]})` }}>
-            <div className="flex justify-between items-center">
+          <div className="basis-1/2 rounded-xl min-h-[400px] md:min-h-[750px] relative">
+            <img src={property.images[0]} className="absolute w-full h-full rounded-xl" />
+            <div className="flex justify-between items-center relative p-4 ">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl">For Rent</div>
               <div className="text-redColor flex items-center gap-2">
                 <button onClick={toggleFavorite} className="p-2">
@@ -161,7 +175,7 @@ const Property = () => {
             </div>
             <div className="flex  items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
               <span>{t("phoneNumber")}</span>
-              {loading ? <Skeleton className="rounded-xl h-[20px] w-[150px]" /> : <span dir="ltr" className="capitalize">{`${property.createdBy.countryCode} ${property.createdBy.phone}`}</span>}
+              {loading ? <Skeleton className="rounded-xl h-[20px] w-[150px]" /> : <span dir="ltr" className="capitalize">{`+${property.countryCode} ${property.phone}`}</span>}
             </div>
           </div>
         </div>
@@ -187,17 +201,19 @@ const Property = () => {
           {loading ? (
             <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full mb-8" />
           ) : (
-            <MapContainer center={[position.lat, position.lng]} zoom={8} style={{ height: "500px", width: "100%" }}>
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors" />
-              <Marker position={[position.lat, position.lng]} />
-            </MapContainer>
+            <div className="mb-8">
+              <MapContainer center={[position.lat, position.lng]} zoom={8} style={{ height: "500px", width: "100%" }}>
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors" />
+                <Marker position={[position.lat, position.lng]} />
+              </MapContainer>
+            </div>
           )}
         </>
       )}
 
       {/* Related Carousel */}
       <h6 className="font-bold font-gothic text-[25px] md:text-[32px] text-darkGrey mb-6">{t("relatedTo")}</h6>
-      {loading ? (
+      {loading2 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full" />
           <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full hidden md:block" />
@@ -205,7 +221,7 @@ const Property = () => {
           <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full hidden lg:block" />
         </div>
       ) : (
-        <RelatedCarousel />
+        <RelatedCarousel list={related} />
       )}
     </section>
   );

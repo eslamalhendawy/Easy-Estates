@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Link } from "react-router-dom";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
@@ -8,98 +10,24 @@ import bathroom from "/assets/bathroom.svg";
 import area from "/assets/area.svg";
 import share from "/assets/share.svg";
 
-const RelatedCarousel = () => {
-  const list = [
-    {
-      id: 1,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 2,
-      type: "For Rent",
-      favorite: false,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 6,
-      bathrooms: 3,
-      area: 1200,
-    },
-    {
-      id: 3,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 4,
-      type: "For Rent",
-      favorite: false,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 6,
-      bathrooms: 3,
-      area: 1200,
-    },
-    {
-      id: 5,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-    {
-      id: 6,
-      type: "For Rent",
-      favorite: true,
-      title: "Luxury Family Home",
-      address: "1800-1818 79th St",
-      price: "5600",
-      image: "/assets/property.jpg",
-      rooms: 4,
-      bathrooms: 1,
-      area: 400,
-    },
-  ];
-
+const RelatedCarousel = ({list}) => {
   return (
     <div className="mx-auto">
       <Carousel className="w-full">
         <CarouselContent>
           {list.map((item, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
-              <Link to={`/property/${item.id}`} key={index}>
-                <div className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl" style={{ backgroundImage: `url(${item.image})` }}>
-                  <div className="flex justify-between items-center">
-                    <div className="bg-redColor text-white px-4 py-1 rounded-xl">{item.type}</div>
+              <Link to={`/property/${item._id}`} key={index}>
+                <div className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl relative">
+                  <img src={item.images[0]} className="absolute w-full h-full top-0 left-0 rounded-xl" alt="" />
+                  <div className="flex justify-between items-center relative">
+                    <div className="bg-redColor text-white px-4 py-1 rounded-xl capitalize">For {item.type}</div>
                     <div className="text-redColor flex items-center gap-2">
                       <i className={`fa-heart text-xl ${item.favorite ? "fa-solid" : "fa-regular "}`}></i>
                       <img src={share} className="size-[23px]" alt="" />
                     </div>
                   </div>
-                  <div className="bg-white p-2 rounded-xl">
+                  <div className="bg-white p-2 rounded-xl relative">
                     <h4 className="text-darkGrey font-semibold text-lg mb-1">{item.title}</h4>
                     <div className="flex items-center gap-1 text-sm font-medium mb-1">
                       <img className="size-[18px]" src={location} />

@@ -34,6 +34,7 @@ const Sell = () => {
   const [type, setType] = useState("");
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("20");
   const [position, setPosition] = useState(null);
   const [loading, setLoading] = useState(false);
   const { userData } = useAppContext();
@@ -159,19 +160,19 @@ const Sell = () => {
   };
 
   const handleClick = async () => {
-    if (!propertyType || !images || !type || !squareFootage || !furniture || !bedrooms || !bathrooms || !city || !position || !address || !phoneNumber || !price || !description || !title) {
+    if (!propertyType || !images || !type || !squareFootage || !furniture || !bedrooms || !bathrooms || !city || !position || !address || !phoneNumber || !countryCode || !price || !description || !title) {
       toast({ title: t("fillAllFields"), variant: "destructive" });
       return;
     }
-    if(!regNumbers.test(squareFootage)) {
+    if (!regNumbers.test(squareFootage)) {
       toast({ title: t("validArea"), variant: "destructive" });
       return;
     }
-    if(!regNumbers.test(phoneNumber) || phoneNumber.length !== 11) {
+    if (!regNumbers.test(phoneNumber) || phoneNumber.length !== 11) {
       toast({ title: t("validPhone"), variant: "destructive" });
       return;
     }
-    if(!regNumbers.test(price)) {
+    if (!regNumbers.test(price)) {
       toast({ title: t("validPrice"), variant: "destructive" });
       return;
     }
@@ -192,13 +193,17 @@ const Sell = () => {
     formData.append("furniture", furniture);
     formData.append("type", type);
     formData.append("city", city);
-    formData.append("phoneNumber", phoneNumber);
+    formData.append("phone", phoneNumber);
+    formData.append("countryCode", countryCode);
     formData.append("location.coordinates[0]", position.lat);
     formData.append("location.coordinates[1]", position.lng);
     const response = await postData("/properties", formData, localStorage.getItem("token"));
-    if(response.data){
+    if (response.data) {
       toast({ title: t("propertyPosted"), variant: "success" });
       navigate(`/property/${response.data._id}`);
+    } else {
+      toast({ title: t("errorMessage"), variant: "destructive" });
+      setLoading(false);
     }
   };
 
@@ -343,7 +348,17 @@ const Sell = () => {
           <div className="md:grow">
             <div className={`grow flex flex-col sm:flex-row gap-2 mb-2 ${i18n.language === "ar" && "flex-row-reverse"}`}>
               <div className="border border-[#D9D9D9] px-2 py-2 rounded-lg w-[50px] flex items-center justify-center">
-                <input type="text" id="name" className="outline-none focus:border-darkGrey duration-200 w-[30px]" disabled={true} value="+20" />
+                <input
+                  onChange={(e) => {
+                    const value = e.target.value.replace("+", "").trim(); // Remove the "+" if present
+                    setCountryCode(value);
+                  }}
+                  type="text"
+                  id="countryCode"
+                  dir="ltr"
+                  className="outline-none focus:border-darkGrey duration-200 w-[40px] p-1"
+                  value={`+${countryCode}`}
+                />
               </div>
               <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder={t("enterPhoneNumber")} type="text" id="phone number" className="border border-[#D9D9D9] outline-none px-2 py-2 rounded-lg w-full focus:border-darkGrey duration-200" />
             </div>

@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { getData, deleteData } from "@/lib/apiCalls";
+import { getData, deleteData, putData } from "@/lib/apiCalls";
 
 const MyAds = () => {
   const [ads, setAds] = useState([]);
   const [filteredAds, setFilteredAds] = useState([]);
-  const [selectedTab, setSelectedTab] = useState("active");
+  const [selectedTab, setSelectedTab] = useState("true");
   const [loading, setLoading] = useState(true);
   const { t, i18n } = useTranslation();
 
@@ -20,34 +20,34 @@ const MyAds = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     const fetchAds = async () => {
-      const response = await getData("/properties/me", localStorage.getItem("token"));
-      console.log(response);
+      const response = await getData(`/properties/me?approved=${selectedTab}`, localStorage.getItem("token"));
       setAds(response.data);
       setFilteredAds(response.data);
       setLoading(false);
     };
     fetchAds();
-  }, []);
-
-  useEffect(() => {
-    if (selectedTab === "active") {
-      const filtered = ads.filter((item) => item.approved === "active");
-      setFilteredAds(filtered);
-    }
-    if (selectedTab === "inactive") {
-      const filtered = ads.filter((item) => item.approved === "inactive");
-      setFilteredAds(filtered);
-    }
-    if (selectedTab === "pending") {
-      const filtered = ads.filter((item) => item.approved === "pending");
-      setFilteredAds(filtered);
-    }
-  }, [selectedTab, ads]);
+  }, [selectedTab]);
 
   const handleDelete = async (id) => {
     await deleteData(`/properties/${id}`, localStorage.getItem("token"));
     window.location.reload();
+  };
+
+  const setInactive = async (id) => {
+    const response = await putData(`/properties/${id}`, { approved: false }, localStorage.getItem("token"));
+    console.log(response);
+    if (response) {
+      window.location.reload();
+    }
+  };
+  const setActive = async (id) => {
+    const response = await putData(`/properties/${id}`, { approved: true }, localStorage.getItem("token"));
+    console.log(response);
+    if (response) {
+      window.location.reload();
+    }
   };
 
   return (
@@ -55,10 +55,10 @@ const MyAds = () => {
       <span className="text-greyColor text-[18px] font-semibold block mb-2">{t("profile")}</span>
       <h1 className="font-goldman font-bold text-xl md:text-[32px] mb-8">{t("myAdsHeader")}</h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:flex gap-4 mb-8">
-        <button onClick={() => setSelectedTab("active")} className={`my-adds-nav-buttons ${selectedTab === "active" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
+        <button onClick={() => setSelectedTab("true")} className={`my-adds-nav-buttons ${selectedTab === "true" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
           {t("active")}
         </button>
-        <button onClick={() => setSelectedTab("inactive")} className={`my-adds-nav-buttons ${selectedTab === "inactive" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
+        <button onClick={() => setSelectedTab("false")} className={`my-adds-nav-buttons ${selectedTab === "false" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
           {t("inactive")}
         </button>
         <button onClick={() => setSelectedTab("pending")} className={`my-adds-nav-buttons ${selectedTab === "pending" ? "border-veryDarkGrey text-veryDarkGrey" : "border-lightGrey text-lightGrey"}`}>
@@ -106,7 +106,15 @@ const MyAds = () => {
                 {t("view&Edit")}
               </Link>
               <div className="flex gap-2">
-                <button className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 hover:text-veryDarkGrey hover:border-veryDarkGrey">{t("inactive")}</button>
+                {selectedTab === "false" ? (
+                  <button onClick={() => setActive(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 hover:text-veryDarkGrey hover:border-veryDarkGrey">
+                    {t("active")}
+                  </button>
+                ) : (
+                  <button onClick={() => setInactive(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 hover:text-veryDarkGrey hover:border-veryDarkGrey">
+                    {t("inactive")}
+                  </button>
+                )}
                 <button onClick={() => handleDelete(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 bg-black text-white">
                   {t("delete")}
                 </button>

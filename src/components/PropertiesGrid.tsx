@@ -10,23 +10,23 @@ import bathroom from "/assets/bathroom.svg";
 import area from "/assets/area.svg";
 import share from "/assets/share.svg";
 
-
-const PropertiesGrid: React.FC<PropertiesGridProps> = (props) => {
+const PropertiesGrid = (props) => {
   const { i18n } = useTranslation();
 
   return (
     <div dir={i18n.language === "ar" ? "rtl" : "ltr"} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-6 font-gothic mx-auto">
-      {props.list.map((item, index) => (
-        <Link to={`/property/${item._id}`} key={index}>
-          <div className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl" style={{ backgroundImage: `url(${item.images[0]})` }}>
-            <div className="flex justify-between items-center">
+      {props.list.map((item) => (
+        <Link to={`/property/${item._id}`} key={item._id}>
+          <div className="p-4 h-[450px] flex flex-col justify-between rounded-xl relative">
+            <img src={item.images[0]} className="absolute w-full h-full top-0 left-0 rounded-xl" alt="" />
+            <div className="flex justify-between items-center relative">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl capitalize">For {item.type}</div>
               <div className="text-redColor flex items-center gap-2">
                 <i className={`fa-heart text-xl ${item.isFavorite ? "fa-solid" : "fa-regular "}`}></i>
                 <img src={share} className="size-[23px]" alt="" />
               </div>
             </div>
-            <div className="bg-white p-2 rounded-xl">
+            <div className="bg-white p-2 rounded-xl relative">
               <h4 className="text-darkGrey font-semibold text-lg mb-1 capitalize">{item.title}</h4>
               <div className="flex items-center gap-1 text-sm font-medium mb-1">
                 <img className="size-[18px]" src={location} />

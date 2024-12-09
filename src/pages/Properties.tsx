@@ -59,8 +59,6 @@ const Properties = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       const response = await getData("/properties", localStorage.getItem("token"));
-      console.log(response.data);
-
       setProperties(response.data);
       setFilteredProperties(response.data);
       setLoading(false);
