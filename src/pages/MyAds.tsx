@@ -102,18 +102,22 @@ const MyAds = () => {
               </div>
             </div>
             <div className="flex flex-col justify-between items-start lg:items-end gap-4">
-              <Link to={`/edit-ad/${item._id}`} className="text-redColor font-bold text-lg lg:text-[22px]">
-                {t("view&Edit")}
-              </Link>
-              <div className="flex gap-2">
+              {selectedTab === "true" && (
+                <Link to={`/edit-ad/${item._id}`} className="text-redColor font-bold text-lg lg:text-[22px]">
+                  {t("view&Edit")}
+                </Link>
+              )}
+              <div className="flex gap-2 mt-auto">
                 {selectedTab === "false" ? (
                   <button onClick={() => setActive(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 hover:text-veryDarkGrey hover:border-veryDarkGrey">
                     {t("active")}
                   </button>
                 ) : (
-                  <button onClick={() => setInactive(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 hover:text-veryDarkGrey hover:border-veryDarkGrey">
-                    {t("inactive")}
-                  </button>
+                  selectedTab === "true" && (
+                    <button onClick={() => setInactive(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 hover:text-veryDarkGrey hover:border-veryDarkGrey">
+                      {t("inactive")}
+                    </button>
+                  )
                 )}
                 <button onClick={() => handleDelete(item._id)} className="px-8 py-2 border border-lightGrey rounded-lg text-[16px] font-semibold  duration-200 bg-black text-white">
                   {t("delete")}
