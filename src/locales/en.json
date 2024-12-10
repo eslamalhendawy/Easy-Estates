@@ -139,5 +139,7 @@
   "selectGovernorate": "Select Governorate",
   "propertyPosted": "Property posted successfully",
   "postingProperty": "Posting Property Please Wait",
-  "editAd": "Edit Your Ad"
+  "editAd": "Edit Your Ad",
+  "editingProperty": "Editing Property Please Wait",
+  "propertyEdited": "Property edited successfully"
 }

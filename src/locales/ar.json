@@ -139,5 +139,7 @@
   "selectGovernorate": "اختر المحافظة",
   "propertyPosted": "تم نشر العقار بنجاح",
   "postingProperty": "نشر العقار يرجى الانتظار",
-  "editAd": "تعديل الإعلان"
+  "editAd": "تعديل الإعلان",
+  "editingProperty": "تعديل العقار يرجى الانتظار",
+  "propertyEdited": "تم تعديل العقار بنجاح"
 }

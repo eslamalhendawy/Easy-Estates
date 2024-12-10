@@ -38,7 +38,7 @@ const EditAd = () => {
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("20");
-  const [position, setPosition] = useState(null);
+  const [position, setPosition] = useState({lat: 26.8206, lng: 30.8025});
   const [loading, setLoading] = useState(true);
   const [imagePreviews, setImagePreviews] = useState([]);
 
@@ -70,6 +70,7 @@ const EditAd = () => {
       setPhoneNumber(response.data.phone);
       setPrice(response.data.price);
       setDescription(response.data.description);
+      setPosition({ lat: response.data.location.coordinates[0], lng: response.data.location.coordinates[1] });
       setLoading(false);
     }
   };
@@ -152,6 +153,8 @@ const EditAd = () => {
     { name: "Sohag, Egypt", arabic: "سوهاج, مصر" },
   ];
 
+  const regNumbers = /^[0-9]+$/;
+
   const handleImageButtonClick = () => {
     if (images.length === 5) {
       toast({ title: t("maxImages"), variant: "destructive" });
@@ -205,11 +208,11 @@ const EditAd = () => {
       return;
     }
     setLoading(true);
-    toast({ title: t("postingProperty"), variant: "default" });
+    toast({ title: t("editingProperty"), variant: "default" });
     const formData = new FormData();
-    images.forEach((file) => {
-      formData.append(`images`, file);
-    });
+    // images.forEach((file) => {
+    //   formData.append(`images`, file);
+    // });
     formData.append("title", title);
     formData.append("description", description);
     formData.append("price", price);
@@ -225,9 +228,11 @@ const EditAd = () => {
     formData.append("countryCode", countryCode);
     formData.append("location.coordinates[0]", position.lat);
     formData.append("location.coordinates[1]", position.lng);
-    const response = await postData("/properties", formData, localStorage.getItem("token"));
+    const response = await putData(`/properties/${id}`, formData, localStorage.getItem("token"));
+    console.log(response);
+    
     if (response.data) {
-      toast({ title: t("propertyPosted"), variant: "success" });
+      toast({ title: t("propertyEdited"), variant: "success" });
       navigate(`/property/${response.data._id}`);
     } else {
       toast({ title: t("errorMessage"), variant: "destructive" });
@@ -357,7 +362,7 @@ const EditAd = () => {
         <div className="px-6 pb-3 flex flex-col gap-2 md:flex-row md:gap-0">
           <span className="text-darkGrey font-bold text-lg basis-1/3">{t("location")}*</span>
           <div className="grow">
-            <MapContainer center={[26.8206, 30.8025]} zoom={6} style={{ height: "500px", width: "100%" }}>
+            <MapContainer center={loading ? [26.8206, 30.8025] : [position.lat, position.lng]} zoom={6} style={{ height: "500px", width: "100%" }}>
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors" />
               <LocationMarker />
             </MapContainer>
@@ -422,7 +427,7 @@ const EditAd = () => {
         {/* Button */}
         <div className="p-8 flex justify-end">
           <button disabled={loading} onClick={handleClick} className={`duration-200 text-white py-2 px-6 rounded-lg font-bold ${loading ? "bg-lightGrey" : "bg-blackColor hover:bg-darkGrey"}`}>
-            {t("postNow")}
+            {t("saveChanges")}
           </button>
         </div>
       </div>
