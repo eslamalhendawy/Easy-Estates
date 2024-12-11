@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { getData, putData } from "@/lib/apiCalls";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -38,12 +38,12 @@ const EditAd = () => {
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("20");
-  const [position, setPosition] = useState({lat: 26.8206, lng: 30.8025});
+  const [position, setPosition] = useState({ lat: 26.8206, lng: 30.8025 });
   const [loading, setLoading] = useState(true);
   const [imagePreviews, setImagePreviews] = useState([]);
+  const [backendImages, setBackendImages] = useState([]);
 
   const { userData } = useAppContext();
-
 
   const fileInput = useRef<HTMLInputElement>(null);
   const { id } = useParams();
@@ -54,11 +54,10 @@ const EditAd = () => {
 
   const fetchAds = async () => {
     const response = await getData(`/properties/${id}`, localStorage.getItem("token"));
-    console.log(response);
     if (response.data) {
       setTitle(response.data.title);
       setPropertyType(response.data.propertyType._id);
-      setImages(response.data.images);
+      setBackendImages(response.data.images);
       setType(response.data.type);
       setSquareFootage(response.data.squareFootage);
       setFurniture(response.data.furniture[0]._id);
@@ -66,7 +65,7 @@ const EditAd = () => {
       setBedrooms(response.data.bedrooms);
       setCity(response.data.city);
       setAddress(response.data.address);
-      setCountryCode(response.data.countryCode)
+      setCountryCode(response.data.countryCode);
       setPhoneNumber(response.data.phone);
       setPrice(response.data.price);
       setDescription(response.data.description);
@@ -80,7 +79,6 @@ const EditAd = () => {
     window.scrollTo(0, 0);
     fetchAds();
   }, []);
-
 
   const typeList = [
     {
@@ -180,6 +178,28 @@ const EditAd = () => {
     setImages((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
+  const handleBackendImageClick = async (url) => {
+    const response = await axios
+      .delete(`https://easyestate.codepeak.live/api/v1/properties/delete-image/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Add the token to the Authorization header
+          "Content-Type": "application/json", // Optional: specify the content type
+        },
+        data: { image: url }, // Attach the body data
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+    if (response.data.status === "success") {
+      setBackendImages(response.data.data);
+    } else {
+      toast({ title: t("errorMessage"), variant: "destructive" });
+    }
+  };
+
   const LocationMarker = () => {
     useMapEvents({
       click(e) {
@@ -210,9 +230,9 @@ const EditAd = () => {
     setLoading(true);
     toast({ title: t("editingProperty"), variant: "default" });
     const formData = new FormData();
-    // images.forEach((file) => {
-    //   formData.append(`images`, file);
-    // });
+    images.forEach((file) => {
+      formData.append(`images`, file);
+    });
     formData.append("title", title);
     formData.append("description", description);
     formData.append("price", price);
@@ -229,8 +249,6 @@ const EditAd = () => {
     formData.append("location.coordinates[0]", position.lat);
     formData.append("location.coordinates[1]", position.lng);
     const response = await putData(`/properties/${id}`, formData, localStorage.getItem("token"));
-    console.log(response);
-    
     if (response.data) {
       toast({ title: t("propertyEdited"), variant: "success" });
       navigate(`/property/${response.data._id}`);
@@ -263,8 +281,11 @@ const EditAd = () => {
             <button onClick={handleImageButtonClick} className="bg-lightGrey hover:bg-greyColor duration-200 w-[100px] h-[60px] xl:w-[120px] xl:h-[80px] rounded-xl text-[32px]">
               +
             </button>
-            {images.map((image, index) => (
-              <img onClick={() => handleImageClick(index)} key={index} src={image} alt="" className="w-[100px] h-[60px] xl:w-[120px] xl:h-[80px] object-cover rounded-xl" />
+            {backendImages.map((image, index) => (
+              <img onClick={() => handleBackendImageClick(image)} key={index} src={image} alt="" className="w-[100px] h-[60px] xl:w-[120px] xl:h-[80px] object-cover rounded-xl cursor-pointer" />
+            ))}
+            {imagePreviews.map((image, index) => (
+              <img onClick={() => handleImageClick(index)} key={index} src={image} alt="" className="w-[100px] h-[60px] xl:w-[120px] xl:h-[80px] object-cover rounded-xl cursor-pointer" />
             ))}
           </div>
         </div>
