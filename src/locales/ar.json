@@ -141,5 +141,9 @@
   "postingProperty": "نشر العقار يرجى الانتظار",
   "editAd": "تعديل الإعلان",
   "editingProperty": "تعديل العقار يرجى الانتظار",
-  "propertyEdited": "تم تعديل العقار بنجاح"
+  "propertyEdited": "تم تعديل العقار بنجاح",
+  "chats": "المحادثات",
+  "callUs": "اتصل بنا",
+  "chatWithUs": "دردش معنا",
+  "numberCopied": "تم نسخ الرقم إلى الحافظة"
 }

@@ -21,6 +21,7 @@ import Privacy from "./pages/Privacy";
 import Profile from "./pages/Profile";
 import Sell from "./pages/Sell";
 import EditAd from "./pages/EditAd";
+import Chats from "./pages/Chats";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/edit-ad/:id" element={<EditAd />} />
+          <Route path="/chats" element={<Chats />} />
         </Routes>
         <Toaster />
         <Footer />

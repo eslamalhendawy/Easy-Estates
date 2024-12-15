@@ -37,6 +37,9 @@ const ProfileMenu = () => {
             <span className="bg-[#403D39] hover:bg-darkGrey duration-200 text-white mx-auto block mb-2 px-6 py-2 rounded-xl text-center cursor-pointer">{t("viewProfile")}</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => navigate("/chats")} className="cursor-pointer">
+            {t("chats")}
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => navigate("/my-ads")} className="cursor-pointer">
             {t("myAds")}
           </DropdownMenuItem>

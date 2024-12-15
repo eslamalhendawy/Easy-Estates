@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 
@@ -20,6 +20,7 @@ import location from "/assets/location.svg";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { toast } from "@/hooks/use-toast";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -79,8 +80,13 @@ const Property = () => {
     }
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`+${property.countryCode} ${property.phone}`);
+    toast({ title: t("numberCopied"), variant: "success" });
+  };
+
   return (
-    <section dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
+    <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-12 mb-8">
         {/* Image */}
         {loading ? (
@@ -171,11 +177,11 @@ const Property = () => {
           <div className="flex flex-col gap-6 font-gothic font-semibold sm:text-lg mb-6">
             <div className="flex items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
               <span>{t("price")}</span>
-              {loading ? <Skeleton className="rounded-xl h-[20px] w-[150px]" /> : <span className="capitalize">{property.price}EGP</span>}
+              {loading ? <Skeleton className="rounded-xl h-[20px] w-[150px] " /> : <span className="capitalize text-redColor">{property.price} EGP</span>}
             </div>
-            <div className="flex  items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
-              <span>{t("phoneNumber")}</span>
-              {loading ? <Skeleton className="rounded-xl h-[20px] w-[150px]" /> : <span dir="ltr" className="capitalize">{`+${property.countryCode} ${property.phone}`}</span>}
+            <div className="flex flex-col md:flex-row items-center gap-5">
+              <button onClick={copyToClipboard} className="border border-lightGrey hover:border-darkGrey duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("callUs")}</button>
+              <Link to="/chats" className="border border-lightGrey hover:border-blackColor bg-blackColor text-center text-white duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("chatWithUs")}</Link>
             </div>
           </div>
         </div>
@@ -223,7 +229,7 @@ const Property = () => {
       ) : (
         <RelatedCarousel list={related} />
       )}
-    </section>
+    </main>
   );
 };
 

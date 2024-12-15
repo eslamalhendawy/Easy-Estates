@@ -141,5 +141,9 @@
   "postingProperty": "Posting Property Please Wait",
   "editAd": "Edit Your Ad",
   "editingProperty": "Editing Property Please Wait",
-  "propertyEdited": "Property edited successfully"
+  "propertyEdited": "Property edited successfully",
+  "chats": "Chats",
+  "callUs": "Call Us",
+  "chatWithUs": "Chat With Us",
+  "numberCopied": "Number Copied To Clipboard"
 }
