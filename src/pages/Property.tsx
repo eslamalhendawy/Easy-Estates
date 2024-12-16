@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 
-import { getData, putData, deleteData } from "@/lib/apiCalls";
+import { getData, putData, deleteData, postData } from "@/lib/apiCalls";
 
 import PictureCarousel from "@/components/PictureCarousel";
 import RelatedCarousel from "@/components/RelatedCarousel";
@@ -38,6 +38,7 @@ const Property = () => {
   const [position, setPosition] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = `Easy Estates | ${loading ? "Property" : property.title}`;
@@ -84,6 +85,16 @@ const Property = () => {
     navigator.clipboard.writeText(`+${property.countryCode} ${property.phone}`);
     toast({ title: t("numberCopied"), variant: "success" });
   };
+
+  const startChat = async () => {
+    const response = await postData("/chats/init", {property: id}, localStorage.getItem("token"));
+    console.log(response);
+    if (response.status === "success") {
+      navigate("/chats");
+    }else{
+      toast({ title: t("errorMessage"), variant: "error" });
+    }
+  }
 
   return (
     <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
@@ -181,7 +192,7 @@ const Property = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center gap-5">
               <button onClick={copyToClipboard} className="border border-lightGrey hover:border-darkGrey duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("callUs")}</button>
-              <Link to="/chats" className="border border-lightGrey hover:border-blackColor bg-blackColor text-center text-white duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("chatWithUs")}</Link>
+              <button onClick={startChat} className="border border-lightGrey hover:border-blackColor bg-blackColor text-center text-white duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("chatWithUs")}</button>
             </div>
           </div>
         </div>

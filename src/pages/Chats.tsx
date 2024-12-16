@@ -50,8 +50,8 @@ const Chats = () => {
           ) : (
             chatsList.map((chat) => (
               <div key={chat._id} className="border-b border-[#D9D9D9] py-4">
-                <h2 className="font-bold text-lg">{chat.property.title}</h2>
-                <p>{chat.messages[chat.messages.length - 1].message}</p>
+                {/* <h2 className="font-bold text-lg">{chat.property.title}</h2> */}
+                {/* <p>{chat.messages[chat.messages.length - 1].message}</p> */}
               </div>
             ))
           )}
