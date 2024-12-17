@@ -40,6 +40,7 @@ const ProfileMenu = () => {
           <DropdownMenuItem onClick={() => navigate("/chats")} className="cursor-pointer">
             {t("chats")}
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => navigate("/my-ads")} className="cursor-pointer">
             {t("myAds")}
           </DropdownMenuItem>
