@@ -89,6 +89,10 @@ body {
 
 .minHeight{
   min-height: calc(100vh - 440px);
+}
+
+.minHeight{
+  min-height: calc(100vh - 240px);
 } 
 
 .accordion-shadow{
@@ -106,4 +110,13 @@ body {
 @keyframes opacityPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.pStyle{
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }

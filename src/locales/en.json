@@ -147,5 +147,6 @@
   "chatWithUs": "Chat With Us",
   "numberCopied": "Number Copied To Clipboard",
   "noChatsYet": "No Chats Yet",
-  "youDon'tHave": "You don't have any chats yet"
+  "youDon'tHave": "You don't have any chats yet",
+  "typeYourMessage": "Type Your Message"
 }
