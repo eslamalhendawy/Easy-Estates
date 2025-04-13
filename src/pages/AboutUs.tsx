@@ -9,9 +9,9 @@ const AboutUs = () => {
   const translatedAboutUs = [
     {
       english:
-        "Welcome to EasyState, your trusted partner in the real estate journey. We are dedicated to transforming the way people buy, sell, and rent properties by providing an innovative, user-friendly platform that connects buyers and sellers seamlessly.",
+        "Welcome to EasyEstate, your trusted partner in the real estate journey. We are dedicated to transforming the way people buy, sell, and rent properties by providing an innovative, user-friendly platform that connects buyers and sellers seamlessly.",
       arabic:
-        "مرحبًا بكم في EasyState، شريككم الموثوق في رحلة العقارات. نحن ملتزمون بتحويل طريقة شراء وبيع وتأجير العقارات من خلال توفير منصة مبتكرة وسهلة الاستخدام تربط المشترين والبائعين بسلاسة."
+        "مرحبًا بكم في EasyEstate، شريككم الموثوق في رحلة العقارات. نحن ملتزمون بتحويل طريقة شراء وبيع وتأجير العقارات من خلال توفير منصة مبتكرة وسهلة الاستخدام تربط المشترين والبائعين بسلاسة."
     },
     {
       english:
@@ -26,17 +26,17 @@ const AboutUs = () => {
         "في EasyState، نؤمن بتمكين مستخدمينا من خلال توفير معلومات شفافة، وخيارات بحث سهلة، وميزات تفاعلية، كلها مصممة لجعل رحلتك العقارية سلسة وفعالة قدر الإمكان. سواء كنت تبحث عن منزلك المثالي أو تقوم بإدراج عقار للبيع، نحن ملتزمون بتقديم تجربة عقارية متميزة مع التركيز على الراحة والتواصل والرعاية."
     },
     {
-      english: "Join us at EasyState, and let's redefine the future of real estate together.",
-      arabic: "انضم إلينا في EasyState، ودعنا نعيد تعريف مستقبل العقارات معًا."
+      english: "Join us at EasyEstate, and let's redefine the future of real estate together.",
+      arabic: "انضم إلينا في EasyEstate، ودعنا نعيد تعريف مستقبل العقارات معًا."
     }
   ];
 
   const translatedPrivacy = [
     {
       english:
-        "EasyState values your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information.",
+        "EasyEstate values your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information.",
       arabic:
-        "تقدّر EasyState خصوصيتك وتلتزم بحماية بياناتك الشخصية. توضح سياسة الخصوصية هذه كيف نقوم بجمع معلوماتك واستخدامها وحمايتها."
+        "تقدّر EasyEstate خصوصيتك وتلتزم بحماية بياناتك الشخصية. توضح سياسة الخصوصية هذه كيف نقوم بجمع معلوماتك واستخدامها وحمايتها."
     },
     {
       english:
@@ -52,14 +52,14 @@ const AboutUs = () => {
     },
     {
       english:
-        "By using EasyState, you agree to this privacy policy. If you have any questions or concerns, feel free to contact us.",
+        "By using EasyEstate, you agree to this privacy policy. If you have any questions or concerns, feel free to contact us.",
       arabic:
-        "باستخدامك EasyState، فإنك توافق على سياسة الخصوصية هذه. إذا كان لديك أي استفسارات أو مخاوف، فلا تتردد في التواصل معنا."
+        "باستخدامك EasyEstate، فإنك توافق على سياسة الخصوصية هذه. إذا كان لديك أي استفسارات أو مخاوف، فلا تتردد في التواصل معنا."
     }
   ];
 
   useEffect(() => {
-    document.title = "EasyState | About Us";
+    document.title = "EasyEstate | About Us";
     window.scrollTo(0, 0);
   }, []);
 
