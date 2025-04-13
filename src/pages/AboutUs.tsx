@@ -32,31 +32,43 @@ const AboutUs = () => {
   ];
 
   const translatedPrivacy = [
-    {
-      english:
-        "EasyEstates values your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information.",
-      arabic:
-        "تقدّر EasyEstates خصوصيتك وتلتزم بحماية بياناتك الشخصية. توضح سياسة الخصوصية هذه كيف نقوم بجمع معلوماتك واستخدامها وحمايتها."
-    },
-    {
-      english:
-        "We collect location data to provide location-based property listings and enhance your user experience. This data is only used while the app is running and is not shared with third parties.",
-      arabic:
-        "نقوم بجمع بيانات الموقع لتقديم قوائم عقارات تعتمد على الموقع وتحسين تجربتك. يتم استخدام هذه البيانات فقط أثناء تشغيل التطبيق ولا تتم مشاركتها مع جهات خارجية."
-    },
-    {
-      english:
-        "We do not sell or rent your personal information. All data is handled in accordance with applicable privacy laws and best practices.",
-      arabic:
-        "لا نقوم ببيع أو تأجير معلوماتك الشخصية. يتم التعامل مع جميع البيانات وفقًا للقوانين المتعلقة بالخصوصية وأفضل الممارسات."
-    },
-    {
-      english:
-        "By using EasyEstates, you agree to this privacy policy. If you have any questions or concerns, feel free to contact us.",
-      arabic:
-        "باستخدامك EasyEstates، فإنك توافق على سياسة الخصوصية هذه. إذا كان لديك أي استفسارات أو مخاوف، فلا تتردد في التواصل معنا."
-    }
-  ];
+  {
+    en: "EasyEstates values your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information.",
+    ar: "تقدّر EasyEstates خصوصيتك وتلتزم بحماية بياناتك الشخصية. توضح سياسة الخصوصية هذه كيف نقوم بجمع معلوماتك واستخدامها وحمايتها."
+  },
+  {
+    en: "We collect location data to provide location-based property listings and enhance your user experience. This data is only used while the app is running and is not shared with third parties.",
+    ar: "نقوم بجمع بيانات الموقع لتقديم قوائم عقارات تعتمد على الموقع وتحسين تجربتك. يتم استخدام هذه البيانات فقط أثناء تشغيل التطبيق ولا تتم مشاركتها مع جهات خارجية."
+  },
+  {
+    en: "We do not sell or rent your personal information. All data is handled in accordance with applicable privacy laws and best practices.",
+    ar: "لا نقوم ببيع أو تأجير معلوماتك الشخصية. يتم التعامل مع جميع البيانات وفقًا للقوانين المتعلقة بالخصوصية وأفضل الممارسات."
+  },
+  {
+    en: "By using EasyEstates, you agree to this privacy policy. If you have any questions or concerns, feel free to contact us at support@easyestates.com.",
+    ar: "باستخدامك EasyEstates، فإنك توافق على سياسة الخصوصية هذه. إذا كان لديك أي استفسارات أو مخاوف، فلا تتردد في التواصل معنا على support@easyestates.com."
+  },
+  {
+    en: "EasyEstates - Privacy Policy\n\nWe at EasyEstates are committed to protecting our users' privacy. This document explains how we collect, use, and protect user data within the EasyEstates app.",
+    ar: "EasyEstates - سياسة الخصوصية\n\nنحن في EasyEstates نلتزم بحماية خصوصية مستخدمينا. يوضح هذا المستند كيفية جمع بيانات المستخدم، استخدامها، وحمايتها داخل تطبيق EasyEstates."
+  },
+  {
+    en: "App Name: EasyEstates",
+    ar: "اسم التطبيق: EasyEstates"
+  },
+  {
+    en: "How to Delete Your Account:\nUsers can request account deletion by contacting us at:\n📧 support@easyestates.com",
+    ar: "كيفية حذف الحساب:\nيمكن للمستخدمين طلب حذف حساباتهم عبر التواصل معنا على البريد الإلكتروني التالي:\n📧 support@easyestates.com"
+  },
+  {
+    en: "Types of Data Collected:\n- Location data (if permission is granted)\n- Contact information (when creating an account)\n- User preferences",
+    ar: "أنواع البيانات التي يتم جمعها:\n- بيانات الموقع (في حال تم منح الإذن)\n- معلومات الاتصال (عند إنشاء حساب)\n- تفضيلات المستخدم"
+  },
+  {
+    en: "Data Retention Period:\nWe retain data as long as the app is being used. Data can be permanently deleted upon user request.",
+    ar: "مدة الاحتفاظ بالبيانات:\nيتم الاحتفاظ بالبيانات طوال فترة استخدام التطبيق، ويمكن حذفها بشكل نهائي عند طلب ذلك من قبل المستخدم."
+  }
+];
 
   useEffect(() => {
     document.title = "EasyEstates | About Us";
