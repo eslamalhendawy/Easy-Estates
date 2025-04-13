@@ -109,7 +109,7 @@ const AboutUs = () => {
             key={index}
             className="font-gothic font-medium sm:text-base xl:text-lg mb-4 text-greyColor xl:w-[95%]"
           >
-            {i18n.language === "ar" ? item.arabic : item.english}
+            {i18n.language === "ar" ? item.ar : item.en}
           </p>
         ))}
       </div>
