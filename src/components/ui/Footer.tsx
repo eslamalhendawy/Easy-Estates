@@ -41,7 +41,7 @@ const Footer = () => {
           <div>
             <h6 className="text-lg font-semibold mb-4">{t("contactUs")}</h6>
             <ul className="text-[#CCC5B9] text-sm">
-              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">hi@easyestate.com</li>
+              <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">codepeak2023@gmail.com</li>
               <li className="mb-2 hover:text-white duration-200 cursor-pointer w-fit">01258935335</li>
             </ul>
           </div>
