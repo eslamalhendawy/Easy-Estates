@@ -91,7 +91,7 @@ const Footer = () => {
       </div>
       {/* Footer Bottom */}
       <div className="border-t border-[#403D39] container mx-auto py-4 px-6 lg:px-12 flex flex-col-reverse md:flex-row gap-4 items-center justify-between">
-        <p className="text-sm font-base">Copyright © 2024. EasyEstate</p>
+        <p className="text-sm font-base">Copyright © 2024. EasyEstates</p>
         <div className="flex gap-4 items-center">
           <span className="text-lg font-semibold">{t("followUs")}</span>
           <i className="fa-brands fa-linkedin-in text-[#CCC5B9] hover:text-white duration-200 cursor-pointer"></i>
