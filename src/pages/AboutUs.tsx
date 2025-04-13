@@ -86,10 +86,11 @@ const AboutUs = () => {
       <div className="w-full mb-8">
         <img className="w-full" src={image} alt="" />
       </div>
-      <h3 className="font-goldman font-bold text-xl sm:text-2xl xl:text-4xl mt-12 mb-6 text-primary">
+     
+      <div className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
+         <h3 className="font-goldman font-bold text-xl sm:text-2xl xl:text-4xl mt-12 mb-6 text-primary">
           {i18n.language === "ar" ? "من نحن" : "About us"}
         </h3>
-      <div className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
         {translatedAboutUs.map((item, index) => (
           <p
             key={index}
