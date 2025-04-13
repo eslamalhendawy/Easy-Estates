@@ -45,20 +45,8 @@ const AboutUs = () => {
     ar: "لا نقوم ببيع أو تأجير معلوماتك الشخصية. يتم التعامل مع جميع البيانات وفقًا للقوانين المتعلقة بالخصوصية وأفضل الممارسات."
   },
   {
-    en: "By using EasyEstates, you agree to this privacy policy. If you have any questions or concerns, feel free to contact us at support@easyestates.com.",
-    ar: "باستخدامك EasyEstates، فإنك توافق على سياسة الخصوصية هذه. إذا كان لديك أي استفسارات أو مخاوف، فلا تتردد في التواصل معنا على support@easyestates.com."
-  },
-  {
-    en: "EasyEstates - Privacy Policy\n\nWe at EasyEstates are committed to protecting our users' privacy. This document explains how we collect, use, and protect user data within the EasyEstates app.",
-    ar: "EasyEstates - سياسة الخصوصية\n\nنحن في EasyEstates نلتزم بحماية خصوصية مستخدمينا. يوضح هذا المستند كيفية جمع بيانات المستخدم، استخدامها، وحمايتها داخل تطبيق EasyEstates."
-  },
-  {
-    en: "App Name: EasyEstates",
-    ar: "اسم التطبيق: EasyEstates"
-  },
-  {
-    en: "How to Delete Your Account:\nUsers can request account deletion by contacting us at:\n📧 support@easyestates.com",
-    ar: "كيفية حذف الحساب:\nيمكن للمستخدمين طلب حذف حساباتهم عبر التواصل معنا على البريد الإلكتروني التالي:\n📧 support@easyestates.com"
+    en: "How to Delete Your Account:\nUsers can request account deletion by contacting us at:\n📧 codepeak2023@gmail.com",
+    ar: "كيفية حذف الحساب:\nيمكن للمستخدمين طلب حذف حساباتهم عبر التواصل معنا على البريد الإلكتروني التالي:\n📧 codepeak2023@gmail.com"
   },
   {
     en: "Types of Data Collected:\n- Location data (if permission is granted)\n- Contact information (when creating an account)\n- User preferences",
