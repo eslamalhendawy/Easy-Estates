@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import axios from "axios";
-const baseURL = "https://easyestate.codepeak.software/api/v1";
+const baseURL = "https://easyestate.pildextech.cf/api/v1";
 
 export const postData = async (url, data, token) => {
   let result = [];
