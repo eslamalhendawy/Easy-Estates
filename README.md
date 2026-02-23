@@ -74,7 +74,7 @@ Easy-Estates/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/easy-estates.git
+git clone https://github.com/eslamalhendawy/easy-estates.git
 cd easy-estates
 ```
 
