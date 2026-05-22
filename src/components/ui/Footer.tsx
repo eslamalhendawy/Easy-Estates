@@ -14,7 +14,7 @@ const Footer = () => {
             <img src={logo} alt="" />
             <h5>EasyEstates</h5>
           </div>
-          <p className="font-gothic font-bold text-lg hidden lg:block">{t("siteDescription")}</p>
+          <p className="font-gothic text-md hidden lg:block">{t("siteDescription")}</p>
         </div>
         {/* Links */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

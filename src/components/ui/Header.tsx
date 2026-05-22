@@ -40,7 +40,7 @@ const Header = () => {
       <Link to="/">
         <img className="w-[150px]" src={logo} alt="" />
       </Link>
-      <ul className="hidden uppercase lg:flex items-center gap-8 text-lg text-greyColor font-bold">
+      <ul className="hidden uppercase lg:flex items-center gap-8 text-md text-greyColor font-bold">
         <li className="hover:text-blackColor duration-200">
           <Link to="/">{t("home")}</Link>
         </li>

@@ -25,10 +25,10 @@ const FeaturedProperties = () => {
 
   return (
     <div dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto py-12 px-6 lg:px-12 font-gothic">
-      <h3 className="uppercase font-goldman font-bold text-center text-3xl md:text-[45px] mb-6">{t("featuredProperties")}</h3>
-      <p className="text-greyColor text-[22px] font-semibold mb-8 text-center">{t("takeADive")}</p>
+      <h3 className="uppercase font-goldman font-semibold text-center text-2xl md:text-[35px] mb-6">{t("featuredProperties")}</h3>
+      <p className="text-greyColor text-md xl:text-xl font-semibold mb-8 text-center">{t("takeADive")}</p>
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
-        <button className={`hover:bg-darkGrey hover:text-white duration-200 px-6 py-2 rounded-xl text-xl font-bold ${selected === "all" && "bg-darkGrey text-white"}`} onClick={() => setSelected("all")}>
+        <button className={`hover:bg-darkGrey hover:text-white duration-200 px-6 py-2 rounded-xl text-md font-bold ${selected === "all" && "bg-darkGrey text-white"}`} onClick={() => setSelected("all")}>
           {t("all")} {t("properties")}
         </button>
         <button className={`hover:bg-darkGrey hover:text-white duration-200 px-6 py-2 rounded-xl text-xl font-bold ${selected === "buy" && "bg-darkGrey text-white"}`} onClick={() => setSelected("buy")}>

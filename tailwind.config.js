@@ -6,7 +6,7 @@ export default {
   	extend: {
   		fontFamily: {
   			gothic: ["Gothic A1", "sans-serif"],
-  			goldman: ["Goldman", "cursive"]
+  			goldman: ["Poppins", "sans-serif"]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -61,9 +61,9 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
-  		screens: {
-  			'3xl': '1920px'
-  		},
+  		// screens: {
+  		// 	'3xl': '1920px'
+  		// },
   		keyframes: {
   			'accordion-down': {
   				from: {

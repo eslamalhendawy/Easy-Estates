@@ -26,9 +26,9 @@ const ResidentialProperties = () => {
     },
   ];
   return (
-    <div dir={i18n.language === "ar" ? "rtl" : "ltr"} className="bg-darkGrey p-8 md:p-12 font-gothic">
+    <section dir={i18n.language === "ar" ? "rtl" : "ltr"} className="bg-darkGrey p-8 md:p-12 font-gothic">
       <div className="container mx-auto">
-        <h3 className="uppercase text-white font-goldman md:text-[45px] font-bold mb-8">{t("residentialProperties")}</h3>
+        <h3 className="uppercase text-white font-goldman md:text-[45px] font-semibold mb-8">{t("residentialProperties")}</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {categories.map((category, index) => (
             <div key={index} className="flex flex-col items-center justify-center mb-4 gap-1 bg-white hover:bg-[#F4F3EE] duration-200 p-4 rounded-lg">
@@ -43,7 +43,7 @@ const ResidentialProperties = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
