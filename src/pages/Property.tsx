@@ -87,14 +87,14 @@ const Property = () => {
   };
 
   const startChat = async () => {
-    const response = await postData("/chats/init", {property: id}, localStorage.getItem("token"));
+    const response = await postData("/chats/init", { property: id }, localStorage.getItem("token"));
     console.log(response);
     if (response.status === "success") {
       navigate("/chats");
-    }else{
+    } else {
       toast({ title: t("errorMessage"), variant: "error" });
     }
-  }
+  };
 
   return (
     <main dir={i18n.language === "ar" ? "rtl" : "ltr"} className="container mx-auto px-2 sm:px-8 xl:px-12 py-8">
@@ -126,7 +126,7 @@ const Property = () => {
               <Skeleton className="rounded-xl h-full" />
             </div>
           ) : (
-            <h1 className="text-2xl font-bold font-goldman xl:text-5xl mb-4 capitalize">{property.title}</h1>
+            <h1 className="text-2xl font-bold font-goldman xl:text-2xl mb-4 capitalize">{property.title}</h1>
           )}
           {/* Address */}
           {loading ? (
@@ -136,10 +136,10 @@ const Property = () => {
           ) : (
             <div className="flex items-center gap-2 mb-10">
               <img src={location} alt="" />
-              <h2 className="text-[16px] text-greyColor font-semibold font-gothic">{property.city}</h2>
+              <h2 className="text-sm text-greyColor font-semibold font-gothic">{property.city}</h2>
             </div>
           )}
-          <h3 className="font-bold font-gothic text-[22px] text-darkGrey mb-6">{t("overview")}</h3>
+          <h3 className="font-bold font-gothic text-xl text-darkGrey mb-6">{t("overview")}</h3>
           {/* Specs */}
           <div className="grid grid-cols-2 gap-6 font-gothic font-semibold text-sm sm:text-lg mb-6">
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 border border-[#D9D9D9] px-2 sm:px-6 py-3 rounded-xl">
@@ -173,26 +173,30 @@ const Property = () => {
           </div>
 
           {/* Description */}
-          <h3 className="font-bold font-gothic text-[22px] text-darkGrey mb-6">{t("description")}</h3>
+          <h3 className="font-bold font-gothic text-xl text-darkGrey mb-6">{t("description")}</h3>
           {loading ? (
             <>
               <Skeleton className="rounded-xl h-[20px] w-full mb-2" />
               <Skeleton className="rounded-xl h-[20px] w-full" />
             </>
           ) : (
-            <p className="mb-3 text-greyColor font-gothic text-lg font-semibold xl:max-w-[85%]">{property.description}</p>
+            <p className="mb-3 text-greyColor font-gothic text-md font-semibold xl:max-w-[85%]">{property.description}</p>
           )}
 
           {/* Details */}
-          <h4 className="font-bold font-gothic text-[22px] text-darkGrey my-6">{t("details")}</h4>
+          <h4 className="font-bold font-gothic text-xl text-darkGrey my-6">{t("details")}</h4>
           <div className="flex flex-col gap-6 font-gothic font-semibold sm:text-lg mb-6">
             <div className="flex items-center justify-between gap-2 sm:gap-4 border border-[#D9D9D9] px-6 py-3 rounded-xl">
               <span>{t("price")}</span>
               {loading ? <Skeleton className="rounded-xl h-[20px] w-[150px] " /> : <span className="capitalize text-redColor">{property.price} EGP</span>}
             </div>
             <div className="flex flex-col md:flex-row items-center gap-5">
-              <button onClick={copyToClipboard} className="border border-lightGrey hover:border-darkGrey duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("callUs")}</button>
-              <button onClick={startChat} className="border border-lightGrey hover:border-blackColor bg-blackColor text-center text-white duration-200 md:basis-1/2 py-3 font-bold rounded-xl">{t("chatWithUs")}</button>
+              <button onClick={copyToClipboard} className="border border-lightGrey hover:border-darkGrey duration-200 md:basis-1/2 py-3 rounded-xl">
+                {t("callUs")}
+              </button>
+              <button onClick={startChat} className="border border-lightGrey hover:border-blackColor bg-blackColor text-center text-white duration-200 md:basis-1/2 py-3 rounded-xl">
+                {t("chatWithUs")}
+              </button>
             </div>
           </div>
         </div>
@@ -214,14 +218,14 @@ const Property = () => {
       {/* Location */}
       {position.lat && position.lng && (
         <>
-          <h5 className="font-bold font-gothic text-[25px] md:text-[32px] text-darkGrey mb-6">{t("location")}</h5>
+          <h5 className="font-bold font-gothic text-md md:text-2xl text-darkGrey mb-6">{t("location")}</h5>
           {loading ? (
             <Skeleton className="rounded-xl h-[350px] md:h-[450px] w-full mb-8" />
           ) : (
             <div className="mb-8">
-              <MapContainer center={[position.lat, position.lng]} zoom={8} style={{ height: "500px", width: "100%" }}>
+              <MapContainer center={[position.lng, position.lat]} zoom={8} style={{ height: "500px", width: "100%" }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors" />
-                <Marker position={[position.lat, position.lng]} />
+                <Marker position={[position.lng, position.lat]} />
               </MapContainer>
             </div>
           )}
