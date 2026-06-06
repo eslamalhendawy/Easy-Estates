@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { getData } from "@/lib/apiCalls";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,12 +14,15 @@ import PropertiesGrid from "@/components/PropertiesGrid";
 
 import locationDot from "/assets/locationDot.svg";
 import filterIcon from "/assets/filter.svg";
+import { log } from "console";
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const { t, i18n } = useTranslation();
 
@@ -58,19 +63,23 @@ const Properties = () => {
 
   useEffect(() => {
     const fetchProperties = async () => {
-      const response = await getData("/properties", localStorage.getItem("token"));
+      setLoading(true);
+      const response = await getData(`/properties?approved=true&page=${currentPage}&limit=12`, localStorage.getItem("token"));
+      console.log(response);
+      setTotalPages(response.paginationResult.numberOfPages);
       setProperties(response.data);
       setFilteredProperties(response.data);
       setLoading(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
     fetchProperties();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (filter) {
       const filtered = properties.filter((property) => property.city === filter);
       setFilteredProperties(filtered);
-    }else{
+    } else {
       setFilteredProperties(properties);
     }
   }, [filter]);
@@ -88,9 +97,7 @@ const Properties = () => {
               </SelectTrigger>
               <SelectContent dir={i18n.language === "ar" ? "rtl" : "ltr"}>
                 <SelectGroup>
-                  <SelectItem value={null}>
-                    {t("all")}
-                  </SelectItem>
+                  <SelectItem value={null}>{t("all")}</SelectItem>
                   {governorates.map((governorate, index) => (
                     <SelectItem key={index} value={governorate.name}>
                       {i18n.language === "ar" ? governorate.arabic : governorate.name}
@@ -166,7 +173,32 @@ const Properties = () => {
           </div>
         </div>
       )}
-      {!loading && filteredProperties.length !== 0 && <PropertiesGrid list={filteredProperties} />}
+      {!loading && filteredProperties.length !== 0 && (
+        <div className="flex flex-col gap-8 mb-8">
+          <PropertiesGrid list={filteredProperties} />
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-4">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="p-2 border border-greyColor rounded-xl disabled:opacity-50 hover:bg-gray-100 transition-colors dark:hover:bg-slate-800"
+              >
+                <ChevronLeft className={`w-5 h-5 ${i18n.language === "ar" ? "rotate-180" : ""}`} />
+              </button>
+              <span className="font-gothic font-semibold text-lg">
+                {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="p-2 border border-greyColor rounded-xl disabled:opacity-50 hover:bg-gray-100 transition-colors dark:hover:bg-slate-800"
+              >
+                <ChevronRight className={`w-5 h-5 ${i18n.language === "ar" ? "rotate-180" : ""}`} />
+              </button>
+            </div>
+          )}
+        </div>
+      )}
       {!loading && filteredProperties.length === 0 && <p className="text-center font-bold font-gothic text-[22px] mt-24">{t("noProperties")}</p>}
     </main>
   );
