@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.easyestate.easyestate",
+      "sha256_cert_fingerprints": [
+        "BE:18:87:A7:44:0A:3E:3F:FE:32:6A:B6:B7:B3:46:2C:D3:3D:33:8C:C3:7D:B9:04:C1:63:17:02:62:A3:54:1F",
+        "FD:D1:4F:2C:BD:CE:83:89:32:08:C1:89:55:6B:B5:9B:C0:8C:1E:8F:1E:3F:D9:A9:E6:CD:F1:C5:2B:93:69:CC"
+      ]
+    }
+  }
+]
