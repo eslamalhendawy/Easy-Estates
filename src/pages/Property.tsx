@@ -106,7 +106,7 @@ const Property = () => {
           </div>
         ) : (
           <div className="basis-1/2 rounded-xl min-h-[400px] md:min-h-[750px] relative">
-            <img src={property.images[0]} className="absolute w-full h-full rounded-xl" />
+            <img src={property.images[0]} crossOrigin="anonymous" className="absolute w-full h-full rounded-xl" />
             <div className="flex justify-between items-center relative p-4 ">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl capitalize">For {property.type}</div>
               <div className="text-redColor flex items-center gap-2">

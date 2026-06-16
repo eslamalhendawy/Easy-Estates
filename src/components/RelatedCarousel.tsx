@@ -19,7 +19,7 @@ const RelatedCarousel = ({list}) => {
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
               <Link to={`/property/${item._id}`} key={index}>
                 <div className="bg-center bg-cover p-4 h-[450px] flex flex-col justify-between rounded-xl relative">
-                  <img src={item.images[0]} className="absolute w-full h-full top-0 left-0 rounded-xl" alt="" />
+                  <img src={item.images[0]} crossOrigin="anonymous" className="absolute w-full h-full top-0 left-0 rounded-xl" alt="" />
                   <div className="flex justify-between items-center relative">
                     <div className="bg-redColor text-white px-4 py-1 rounded-xl capitalize">For {item.type}</div>
                     <div className="text-redColor flex items-center gap-2">

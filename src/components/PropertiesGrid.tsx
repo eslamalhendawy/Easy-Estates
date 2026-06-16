@@ -18,7 +18,7 @@ const PropertiesGrid = (props) => {
       {props.list.map((item) => (
         <Link to={`/property/${item._id}`} key={item._id}>
           <div className="p-4 h-[450px] flex flex-col justify-between rounded-xl relative hover:shadow-lg hover:scale-[1.02] duration-200">
-            <img src={item.images[0]} className="absolute w-full h-full top-0 left-0 rounded-xl" alt="" />
+            <img src={item.images[0]} crossOrigin="anonymous" className="absolute w-full h-full top-0 left-0 rounded-xl" alt="" />
             <div className="flex justify-between items-center relative">
               <div className="bg-redColor text-white px-4 py-1 rounded-xl capitalize">For {item.type}</div>
               <div className="text-redColor flex items-center gap-2">
