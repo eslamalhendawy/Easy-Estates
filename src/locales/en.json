@@ -148,5 +148,11 @@
   "numberCopied": "Number Copied To Clipboard",
   "noChatsYet": "No Chats Yet",
   "youDon'tHave": "You don't have any chats yet",
-  "typeYourMessage": "Type Your Message"
+  "typeYourMessage": "Type Your Message",
+  "products": "Products",
+  "product": "Product",
+  "condition": "Condition",
+  "new": "New",
+  "used": "Used",
+  "noProducts": "No products Found"
 }

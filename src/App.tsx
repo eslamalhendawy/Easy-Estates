@@ -22,6 +22,8 @@ import Profile from "./pages/Profile";
 import Sell from "./pages/Sell";
 import EditAd from "./pages/EditAd";
 import Chats from "./pages/Chats";
+import Products from "./pages/Products";
+import Product from "./pages/Product";
 
 
 function App() {
@@ -57,8 +59,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/properties" element={<Properties />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/property/:id" element={<Property />} />
+          <Route path="/product/:id" element={<Product />} />
           <Route path="/my-ads" element={<MyAds />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/faqs" element={<FAQS />} />

@@ -48,6 +48,9 @@ const Header = () => {
           <Link to="/properties">{t("properties")}</Link>
         </li>
         <li className="hover:text-blackColor duration-200">
+          <Link to="/products">{t("products")}</Link>
+        </li>
+        <li className="hover:text-blackColor duration-200">
           <Link to="/about-us">{t("aboutUs")}</Link>
         </li>
         <li className="hover:text-blackColor duration-200">

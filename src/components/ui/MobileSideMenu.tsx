@@ -64,6 +64,11 @@ const MobileSideMenu = () => {
             </SheetClose>
           </li>
           <li>
+            <SheetClose className="uppercase hover:text-blackColor duration-200 outline-none" onClick={() => navigate("/products")}>
+              {t("products")}
+            </SheetClose>
+          </li>
+          <li>
             <SheetClose className="uppercase hover:text-blackColor duration-200 outline-none" onClick={() => navigate("/about-us")}>
               {t("aboutUs")}
             </SheetClose>
